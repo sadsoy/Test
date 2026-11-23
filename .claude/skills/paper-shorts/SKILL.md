@@ -12,6 +12,7 @@ The method behind four Shorts the user approved (2026-11). All of them are in `s
 | `assets/example/moon` (ดวงจันทร์ด้านเดียว) | A sphere with real maria, spin and libration; the first version of the kit |
 | `shorts/krathong` (กระทงไปไหน) | Statistics with sources; many props; a loop ending |
 | `assets/example/gh-sleep` (GH กับการนอน) | **Anatomy** (head profile and midsagittal brain); a character sheet; **one continuous camera journey** (wall clock → bedroom → rotate and zoom into the head → brain → pituitary → blood → graph → clock flip → back); no hands |
+| `assets/example/robots-what-if` (หุ่นยนต์ทำงานแทน?) | **What-if story arc** (fact today → stamped hypothetical → twist → mechanism → ideas → question); **robots with real joints** (`limb`, `ik`, industrial arm, humanoid) and silhouette people with walk cycles; a money-loop diagram that tears |
 | `assets/example/super-elnino` (ซูเปอร์เอลนีโญ) | **Current events with a fact check** (NOAA and WMO with dates); careful forecast wording; a globe ↔ map match cut from real lon/lat; an equatorial cross-section; region-by-region impacts; a stacked bar separating causes |
 
 Look at each example's `contact_sheet.jpg` and `DELIVERY.md`: that is the bar.
@@ -64,7 +65,9 @@ cp shorts/moon/.gitignore $P/
    - Put spaces where phrases should break: the TTS pauses there, and the pauses become the subtitle and beat
      boundaries.
 3. **Voice:** `python3 scripts/tts_full.py` records the WHOLE script in one request.
-   - Then set `PHR` (phrases per line, read from the silencedetect list; merged phrases are normal), `AFTER`, `TEMPO`
+   - Run `python3 scripts/align.py`: Gemini (`gemini-3.5-flash`) transcribes every silence-separated phrase, assigns
+     it to a line, prints `PHR = [...]` and lists any dropped words. It is a separate quota from TTS.
+   - Then set `PHR` (from align.py; merged phrases are normal), `AFTER`, `TEMPO`
      (1.05–1.1; keep it lower if the brief says "not too fast") and `TAIL` in `split.mjs`, and run
      `node scripts/split.mjs`.
    - Check that `TL.duration` is inside the brief.
@@ -130,6 +133,9 @@ Read each image yourself. Check:
   - Keep Thai compounds whole with `SUB_KEEP` (ดวง|จันทร์).
   - Show digits on screen but time them by the spoken form (`SUB_SPOKEN`).
   - The subtitles sit at y≈1478, so raise characters and landscapes above that band.
+- **Turning a cutout:** never flip `X.scale(-1, 1)` in one frame. Ease the x-scale through a thin edge over about 0.2 s.
+- **What-if topics:** stamp the hypothetical ("สถานการณ์สมมติ · WHAT IF") before it starts, show today's facts (with
+  sources) first, and label proposed solutions as "still debated".
 - **Fonts:** Kanit has no "←" (it renders as a dash). "→", "=" and "+" are fine. Check unusual glyphs on a crop.
 - **Wipes:** a torn sheet must start entirely below the frame (`y = H*1.5 + margin`).
 - **Labels inside a zooming layer** scale with the camera. Fade them before the zoom, or draw them in `layer(0)` or
