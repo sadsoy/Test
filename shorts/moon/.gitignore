@@ -1,0 +1,6 @@
+node_modules/
+out/*
+!out/voice/
+out/voice/*
+!out/voice/narration.wav
+!out/voice/full.wav
