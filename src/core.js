@@ -1,6 +1,6 @@
 // core.js: constants, helpers, paper, paint wrapper, compositing and render hooks.
 // Length and rhythm come from PROJECT in config.js.
-const W = 1920, H = 1080;
+const W = PROJECT.w || 1920, H = PROJECT.h || 1080;        // PROJECT.w/h: other formats (a 9:16 Short is 1080 × 1920)
 const BPM = PROJECT.bpm, BEAT = 60 / BPM, OFF = PROJECT.offset || 0, BOIL = 12, DUR = PROJECT.duration;
 const TAU = Math.PI * 2;
 const PAL = {
@@ -278,7 +278,8 @@ async function setup() {
   paperG = makePaper(); grainC = makeGrain(); glowTex = makeGlowTex(); letG = createGraphics(W, H); letG.pixelDensity(1);
   outC = document.getElementById('out'); outX = outC.getContext('2d');
   await document.fonts.load('100px "Permanent Marker"');
-  await Promise.all(['700 100px "Charm"', 'italic 500 60px "Cormorant Garamond"', '50px "Patrick Hand"'].map(f => document.fonts.load(f, 'ต้นTon')));
+  await Promise.all(['700 100px "Charm"', 'italic 500 60px "Cormorant Garamond"', '50px "Patrick Hand"', ...(PROJECT.fonts || [])].map(f => document.fonts.load(f, 'ต้นTon')));
+  if (typeof PROJECT.setup === 'function') await PROJECT.setup();     // a project's own textures, made once
   window.ready = true;
   if (!location.search.includes('render')) devUI();
 }
