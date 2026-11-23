@@ -67,3 +67,11 @@ code, Ghibli-inspired, built with ClaudeAnimationBase (copied from P Doom).
 ## Open questions
 - Audio rights before any public posting: TTS voices are Google prebuilt (Vertex terms); music uses the macOS GS sound
   bank (Apple licence); SFX are synthesized in code.
+
+## Short: ถ้าโลกเปลี่ยนไปใช้พลังงานสะอาดทั้งหมด? (2026-11-23)
+- Done: 39.9 s, 1080×1920, 30 fps, paper-cut style → `out/shorts/clean-energy_shorts.mp4` (+ `_720p`). Docs in
+  `shorts/clean-energy/` (SCRIPT, STORYBOARD, ASSETS, QC). Page `shorts.html` (`render.mjs --page=shorts.html --fps=30`).
+- Rebuild: TTS take (`scripts/shorts_tts.py shorts/clean-energy/full3.json out/shorts/voice/take Puck gemini-2.5-flash-preview-tts`)
+  → `scripts/shorts_voice.py <take> <cuts>` → re-check `src/shorts/phrases.js` → `node scripts/shorts_audio.mjs` →
+  `render.mjs --page=shorts.html --fps=30 --frames --workers=4 --framesdir=out/shorts/frames` → ffmpeg mux with mix.wav.
+- Open: a human listen for levels and music; n02 "ราว" is spoken short (heard as "เรา" by the transcriber).
