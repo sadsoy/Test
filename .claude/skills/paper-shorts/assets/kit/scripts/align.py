@@ -6,10 +6,11 @@ ctx = ssl.create_default_context(cafile='/root/.ccr/ca-bundle.crt')
 subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', 'out/voice/full.wav', '-ac', '1', '-ar', '16000', '-b:a', '48k', 'out/voice/full_small.mp3'], check=True)
 log = subprocess.run(['ffmpeg', '-i', 'out/voice/full.wav', '-af', 'silencedetect=noise=-38dB:d=0.25', '-f', 'null', '-'], capture_output=True, text=True).stderr
 st = [float(x) for x in re.findall(r'silence_start: ([\d.]+)', log)]; en = [float(x) for x in re.findall(r'silence_end: ([\d.]+)', log)]
+dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', 'out/voice/full.wav'], capture_output=True, text=True).stdout)
 segs = []
 for i, a in enumerate(en):
-    b = st[i + 1] if i + 1 < len(st) else None
-    if b and b - a > .15: segs.append((a, b))
+    b = st[i + 1] if i + 1 < len(st) else dur          # the last phrase may run to the end of the file
+    if b - a > .15: segs.append((a, b))
 audio = base64.b64encode(open('out/voice/full_small.mp3', 'rb').read()).decode()
 lines = json.load(open('scripts/lines.json'))
 prompt = (f"This Thai narration audio has {len(segs)} speech segments separated by pauses (seconds):\n" + "\n".join(f"{i+1}: {a:.2f}-{b:.2f}" for i, (a, b) in enumerate(segs)) +

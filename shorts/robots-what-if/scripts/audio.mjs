@@ -91,7 +91,8 @@ PLAN.forEach(([t, ch, len, name], bi) => {
   if (['explain', 'drama', 'wobble'].includes(name)) for (let s = 0, k = 0; s < len - .02; s += BT, k++) { add(mus, t + s, kick(), name === 'drama' ? .32 : .2, 0); add(mus, t + s + BT / 2, shaker(), .05, .5); }
 });
 // a soft riser into the first zoom and into the outro
-[[11.0, 1.2], [34.2, 1.1]].forEach   // EDIT: risers [start, length] into big reveals(([t, d]) => { const n = Math.round(d * SR); add(mus, t, mul(svf(nz(n), x => 300 + 5000 * (x / d) ** 2, 1.5, 'bp'), x => (x / d) ** 2), .1, 0); });
+// EDIT: risers [start, length] into big reveals
+[[11.0, 1.2], [34.2, 1.1]].forEach(([t, d]) => { const n = Math.round(d * SR); add(mus, t, mul(svf(nz(n), x => 300 + 5000 * (x / d) ** 2, 1.5, 'bp'), x => (x / d) ** 2), .1, 0); });
 // light stereo echo on the music bus
 for (let c = 0; c < 2; c++) { const D = Math.round((c ? .31 : .27) * SR), m = mus[c]; for (let i = D; i < N; i++) m[i] += m[i - D] * .22; }
 

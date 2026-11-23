@@ -9,7 +9,9 @@ req = urllib.request.Request(f"https://generativelanguage.googleapis.com/v1beta/
       data=json.dumps(body).encode(), headers={"Content-Type": "application/json", "x-goog-api-key": "dummy"})
 try: r = json.load(urllib.request.urlopen(req, context=ctx, timeout=300))
 except urllib.error.HTTPError as e: print(e.read()[:400].decode()); sys.exit(1)
-part = r['candidates'][0]['content']['parts'][0]['inlineData']; pcm = base64.b64decode(part['data'])
+c0 = r.get('candidates', [{}])[0]
+if 'content' not in c0: print('no audio:', c0.get('finishReason'), str(r)[:300]); sys.exit(1)
+part = c0['content']['parts'][0]['inlineData']; pcm = base64.b64decode(part['data'])
 out = sys.argv[1] if len(sys.argv) > 1 else 'out/voice/full.wav'
 if pcm[:4] == b'RIFF': open(out, 'wb').write(pcm)
 else:

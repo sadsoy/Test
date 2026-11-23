@@ -13,6 +13,7 @@ The method behind four Shorts the user approved (2026-11). All of them are in `s
 | `shorts/krathong` (กระทงไปไหน) | Statistics with sources; many props; a loop ending |
 | `assets/example/gh-sleep` (GH กับการนอน) | **Anatomy** (head profile and midsagittal brain); a character sheet; **one continuous camera journey** (wall clock → bedroom → rotate and zoom into the head → brain → pituitary → blood → graph → clock flip → back); no hands |
 | `assets/example/robots-what-if` (หุ่นยนต์ทำงานแทน?) | **What-if story arc** (fact today → stamped hypothetical → twist → mechanism → ideas → question); **robots with real joints** (`limb`, `ik`, industrial arm, humanoid) and silhouette people with walk cycles; a money-loop diagram that tears |
+| `assets/example/fusion-sun` (ดวงอาทิตย์บนโลก) | Science what-if with strict fact/hypothesis separation; nuclei with exact p/n counts; a **tokamak cutaway** (D-coil loops wrapped round the tube); energy bars that separate a lab result from a whole system; caveat cards |
 | `assets/example/super-elnino` (ซูเปอร์เอลนีโญ) | **Current events with a fact check** (NOAA and WMO with dates); careful forecast wording; a globe ↔ map match cut from real lon/lat; an equatorial cross-section; region-by-region impacts; a stacked bar separating causes |
 
 Look at each example's `contact_sheet.jpg` and `DELIVERY.md`: that is the bar.
@@ -128,6 +129,12 @@ Read each image yourself. Check:
   - The free tier allows **10 requests per day per model**. Record the whole script in one request;
     `gemini-3.1-flash-tts-preview` with voice `Puck` worked well for Thai.
   - **Never prefix the text with a style instruction**: it gets read aloud.
+  - A request can come back with `finishReason: SAFETY` and no audio (it happened on "กากกัมมันตรังสี"). Reword
+    the phrase without changing the facts. Blocked requests still use quota.
+  - If the 3.1 quota is gone, `TTS_MODEL=gemini-2.5-flash-preview-tts python3 scripts/tts_full.py` works too
+    (voice Puck, slower pace; it needed ×1.13).
+  - **Count your quota:** each video costs 1–3 requests. Get the script length right before recording (budget
+    about 33–35 s of speech).
   - Handle both response formats: RIFF `audio/wav` and raw `audio/l16`.
 - **Subtitles:**
   - Keep Thai compounds whole with `SUB_KEEP` (ดวง|จันทร์).
@@ -136,6 +143,10 @@ Read each image yourself. Check:
 - **Turning a cutout:** never flip `X.scale(-1, 1)` in one frame. Ease the x-scale through a thin edge over about 0.2 s.
 - **What-if topics:** stamp the hypothetical ("สถานการณ์สมมติ · WHAT IF") before it starts, show today's facts (with
   sources) first, and label proposed solutions as "still debated".
+- **Science diagrams:** draw them from geometry, not by eye. For example, a toroidal coil is a loop in the plane of the
+  vertical axis and the radius, so it is edge-on at the front and back. Check them on an asset sheet before animating.
+- **Comments in audio.mjs:** a `//` comment placed mid-line silently disables the rest of that line (this disabled
+  the risers once). Keep comments on their own lines.
 - **Fonts:** Kanit has no "←" (it renders as a dash). "→", "=" and "+" are fine. Check unusual glyphs on a crop.
 - **Wipes:** a torn sheet must start entirely below the frame (`y = H*1.5 + margin`).
 - **Labels inside a zooming layer** scale with the camera. Fade them before the zoom, or draw them in `layer(0)` or
