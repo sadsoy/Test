@@ -108,7 +108,8 @@ function sfx() {
   // 2 setup: whoosh in, the ring fills, the CO2 load
   noiseBurst(CUT.c2 - .25, .55, 300, 2200, .28, { shape: .7 });
   noiseBurst(ph('n02', 1) - .1, .9, 500, 1800, .12, { q: 3 }); paperTap(ph('n02', 1) - .1, .3);
-  thump(ph('n03', 2) - .1, 45, .45, .9); noiseBurst(ph('n03', 2), 1.8, 150, 90, .35, { q: .6 }); paperTap(ph('n03', 2) + .3, .35);
+  thump(ph('n03', 4) - .1, 45, .45, .9); noiseBurst(ph('n03', 4), 1.8, 150, 90, .35, { q: .6 }); paperTap(ph('n03', 4) + .3, .35);
+  noiseBurst(ph('n03', 2), .6, 200, 600, .12, { q: .8 }); thump(ph('n03', 2) + .1, 60, .25, .4);   // the camera finds the power plant
   // the paper sheet wipe to the clean world, sunrise chime, panels unfolding, the -90% drop
   noiseBurst(CUT.c3 - .3, .6, 600, 4000, .4, { q: .7, shape: .6 }); noiseBurst(CUT.c3 + .05, .5, 3500, 900, .3, { q: .7 });
   chime(NT.n04[0] + .2, [74, 78, 81, 86], .1, .2);

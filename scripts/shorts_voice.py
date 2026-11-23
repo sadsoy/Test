@@ -2,17 +2,17 @@
 and lay the lines on the timeline with set gaps. Writes the narration track and src/shorts/narration.js (line times and
 a loudness envelope per frame, for the subtitles and the beats of the animation).
 
-usage: python3 -I scripts/shorts_voice.py <take.wav> <cuts: comma list of approx line starts after the first, s>
+usage: python3 -I scripts/shorts_voice.py <take.wav> <cuts: comma list of approx line starts after the first, s; "=t" for an exact cut>
 Settings below: TEMPO, LEAD (s before the first line), GAP (s before each line), TAIL (s after the last), FPS.
 """
 import sys, json, subprocess, struct, wave, math
 
-TAKE, CUTS = sys.argv[1], [float(x) for x in sys.argv[2].split(",")]
+TAKE, CUTS = sys.argv[1], sys.argv[2].split(",")              # "=17.86" keeps a cut exactly where it is given
 LINES = json.load(open("shorts/clean-energy/lines.json"))
-TEMPO, LEAD, TAIL, FPS = 1.0, .35, 2.6, 30
-GAP = {"n02": .55, "n03": .45, "n04": 1.1, "n05": .6, "n06": 1.1, "n07": .6, "n08": .7, "n09": 1.1, "n10": .8}   # longer before a new act
-# a line re-recorded on its own (the take said "ราว" too short): use that file whole instead of the take's span
-OVERRIDE = {"n02": "out/shorts/voice/take/n02b.wav"}
+TEMPO, LEAD, TAIL, FPS = 1.1, .3, 2.0, 30
+GAP = {"n02": .32, "n03": .28, "n04": .7, "n05": .35, "n06": .7, "n07": .35, "n08": .4, "n09": .7, "n10": .45}   # longer before a new act
+# a line re-recorded on its own can replace the take's span: {"n02": "out/shorts/voice/take/n02b.wav"}
+OVERRIDE = {}
 OUT_WAV, OUT_JS = "out/shorts/audio/narration.wav", "src/shorts/narration.js"
 
 def pcm(path, sr=24000):
@@ -20,10 +20,19 @@ def pcm(path, sr=24000):
     return struct.unpack("<%dh" % (len(p.stdout) // 2), p.stdout), sr
 x, sr = pcm(TAKE)
 def rms(a, b): a, b = max(0, int(a * sr)), min(len(x), int(b * sr)); return (sum(v * v for v in x[a:b]) / max(1, b - a)) ** .5
-# refine each cut to the quietest 60 ms within +-0.45 s
+# snap each cut to the middle of the nearest real pause (>= 80 ms under -40 dB) within 0.7 s. (The quietest 60 ms
+# alone once landed between two words of a line and moved "ยังมาจากฟอสซิล" into the next line, so it was said twice.)
+sd = subprocess.run(["ffmpeg", "-i", TAKE, "-af", "silencedetect=n=-40dB:d=0.08", "-f", "null", "-"], capture_output=True, text=True).stderr
+import re
+st = [float(v) for v in re.findall(r"silence_start: ([\d.]+)", sd)]; en = [float(v) for v in re.findall(r"silence_end: ([\d.]+)", sd)]
+pauses = [((a + b) / 2, b - a) for a, b in zip(st, en)]
 cuts = []
 for c in CUTS:
-    best = min((rms(c + d / 100, c + d / 100 + .06), c + d / 100 + .03) for d in range(-45, 46, 1)); cuts.append(best[1])
+    if c.startswith("="): cuts.append(float(c[1:])); continue
+    c = float(c)
+    near = [p for p in pauses if abs(p[0] - c) <= .7]
+    assert near, f"no pause near {c}: give a better cut time"
+    cuts.append(max(near, key=lambda p: p[1] - abs(p[0] - c))[0])      # the longer pause, the nearer one first
 bounds = [0] + cuts + [len(x) / sr]
 import os; os.makedirs("out/shorts/audio/lines", exist_ok=True)
 keys = list(LINES); assert len(keys) == len(bounds) - 1, (len(keys), len(bounds))

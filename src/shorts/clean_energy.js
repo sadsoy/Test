@@ -62,10 +62,10 @@
   function s2(t, lt, dur) {
     pcBegin(FOS.sky1);
     sky('#B8A285', '#A08A70', '#7E6C5A');
-    const t0 = NT.n02[0], a3 = ph('n03', 2);
-    const cx = kf(t, [[t0, 540], [ph('n03', 0), 520], [ph('n03', 1) + .4, 600], [a3 + .2, 540]]);
-    const cy = kf(t, [[t0, 1000], [ph('n03', 0) - .1, 1040], [ph('n03', 0) + .6, 1300], [ph('n03', 1) + .4, 1380], [a3 + .5, 760], [dur, 700]]);
-    const z = kf(t, [[t0, 1.0], [ph('n03', 0) + .6, 1.18], [ph('n03', 1) + .4, 1.22], [a3 + .5, 1.0], [dur, .98]]);
+    const t0 = NT.n02[0], a3 = ph('n03', 4), elec = ph('n03', 2);   // travel, factories, power … the CO2
+    const cx = kf(t, [[t0, 540], [ph('n03', 0), 520], [ph('n03', 1) + .4, 600], [elec + .4, 360], [a3 + .3, 540]]);
+    const cy = kf(t, [[t0, 1000], [ph('n03', 0) - .1, 1040], [ph('n03', 0) + .6, 1300], [ph('n03', 1) + .4, 1380], [elec + .4, 1180], [a3 + .6, 760], [dur, 700]]);
+    const z = kf(t, [[t0, 1.0], [ph('n03', 0) + .6, 1.18], [ph('n03', 1) + .4, 1.22], [elec + .4, 1.25], [a3 + .6, 1.0], [dur, .98]]);
     pcCam(cx, cy, z);
     layer(.15, () => { for (let i = 0; i < 6; i++) { const x = ((i * 260 + t * 18) % 1600) - 260; cloud(x, 420 + (i % 3) * 140, 1.3, '#8E7E6E', 2, { alpha: .8 }); } });
     // the CO2 load building in the sky
@@ -278,7 +278,7 @@
       ptext('รถไฟฟ้า', 290, 1420, 38, '#FFFFFF', { lv: 2, weight: 600 }); ptext('รถน้ำมัน', 800, 1420, 38, '#FFFFFF', { lv: 2, weight: 600 });
     });
     layer(0, () => {
-      const k = pop(t, six + .9, .35) * out(t, clean - .15, .3);
+      const k = pop(t, six + .7, .35) * out(t, clean - .45, .25);
       if (k > 0) ptext('แร่ ×6', 760, 520, 120, '#3A2E2A', { pop: k, card: '#FFD84D', lv: 4, weight: 800, rot: .05 });
       const k2 = pop(t, clean - .05, .4);
       ptext('สะอาด ≠ ไร้ผลกระทบ', 540, 330, 76, '#FFF3DA', { pop: k2, card: 'rgba(70,52,40,.94)', lv: 3, weight: 800 });
