@@ -21,7 +21,7 @@ const PHR = (() => {
         let best = f, bv = 99; for (let d = -6; d <= 6; d++) { const v = +(env[f + d] ?? 9); if (v < bv) { bv = v; best = f + d; } } f = best;
         while (+(env[f] ?? 9) < 3 && f < env.length - 1) f++;      // then forward to where the voice starts again
       }
-      const set = typeof PHON !== 'undefined' && PHON[key] ? PHON[key][j] : null;     // phrases.js, when it has the line
+      const set = typeof PHREL !== 'undefined' && PHREL[key] ? t0 + PHREL[key][j] / (typeof NARR_TEMPO === 'undefined' ? 1 : NARR_TEMPO) : null;   // phrases.js
       return { txt: w, on: set ?? t0 + (j ? f : 0) / 30 };
     });
   }

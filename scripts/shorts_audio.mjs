@@ -12,7 +12,7 @@ const ctx = vm.createContext({ console });
 vm.runInContext(fs.readFileSync('src/shorts/narration.js', 'utf8') + '\n' + fs.readFileSync('src/shorts/phrases.js', 'utf8') + '\n' + fs.readFileSync('src/shorts/subs_th.js', 'utf8')
   + '\nconst W = 1080, clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));', ctx);
 const NT = vm.runInContext('NT', ctx), ph = (k, i = 0) => vm.runInContext(`ph(${JSON.stringify(k)}, ${i})`, ctx);
-const DUR = 39.9, SR = 48000, N = Math.ceil(DUR * SR), TAU = Math.PI * 2;
+const DUR = vm.runInContext('NARR_DUR', ctx), SR = 48000, N = Math.ceil(DUR * SR), TAU = Math.PI * 2;
 // the cuts, as in clean_energy.js
 const CUT = { c2: NT.n02[0] - .12, c3: NT.n04[0] - .2, c4: NT.n06[0] - .19, c5: NT.n07[0] - .1, c6: NT.n08[0] - .1, c7: NT.n09[0] - .19, c8: NT.n10[0] - .13 };
 
