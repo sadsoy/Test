@@ -67,7 +67,18 @@
 
 ## 4. Quality-control report
 
-The results are in the next section.
+| Check | Result |
+|---|---|
+| Length 30–40 s | **38.47 s** ✅ |
+| 1080×1920, 30 fps, MP4 (H.264 + AAC) | ✅ |
+| Loudness | −14.0 LUFS, peak −1.4 dBFS ✅ |
+| Voice over music + SFX (speech band) | At least **+10.0 dB** on every phrase (median +14.5 dB) ✅. **Fixed:** at 31.9–33.8 s the checklist dings, the water and a splash were only +5.6 dB below the voice; they were lowered. |
+| Picture vs voice | Picture, subtitles and SFX all run on `timing.js`, generated from the narration file ✅ |
+| Frame-to-frame jumps | Every spike is a planned transition or an intended move ✅ |
+| Nothing important out of frame or under the subs | ✅. **Fixed:** the hands stayed on screen after the release; "ไปไหน?" overlapped the moon; in S8 the checklist overlapped the moon; "ทะเล" sat under the subtitles; the S4 seedling sat under the subs; the boat entered after its line had started. |
+| Visuals | **Fixed:** the S4 compost scene was too sparse (added a chute and made the grinder and sack bigger); the S5 soil fell as box-shaped slabs (now wavy strata). ✅ |
+| Spoken numbers match the screen | "เกือบสี่แสน" with 391,027; "ราวเจ็ดเปอร์เซ็นต์" with 7% ✅ |
+| Seamless loop | The final frame matches the opening (hands cradling the krathong) ✅ |
 
 Rights: the voice is Google Gemini TTS (prebuilt voice, under Google's terms); the music and SFX were synthesized here;
 the fonts are OFL; the statistics are from the news reports cited above.
