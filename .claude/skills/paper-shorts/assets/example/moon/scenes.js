@@ -1,8 +1,6 @@
 // scenes.js: the seven scenes. Each is fn(t) painting the whole frame; times come from the narration (TL).
-const LN = Object.fromEntries(TL.lines.map(l => [l.id, l]));
-const ph = (id, i) => LN[id].ph[i];
+// (LN, ph, wordAt, label, wsc, pin come from the kit's src/ui.js)
 // a word's time inside a phrase, by its position in the text (Thai TTS speaks at a near-even rate)
-const wordAt = (id, i, word) => { const txt = SUBT[id][i], k = txt.indexOf(word), [a, b] = ph(id, i); return k < 0 ? a : lerp(a, b, k / txt.length); };
 
 // ---------- S1 / S7: the night hill ----------
 const MOON1 = [0, -480], MOON_PAR = .85;

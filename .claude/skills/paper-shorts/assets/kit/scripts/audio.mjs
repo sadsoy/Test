@@ -63,17 +63,18 @@ function shaker() { const n = Math.round(.08 * SR); return mul(svf(nz(n), 7000, 
 
 // ---------- score: an original piece in D minor → F major, 96 BPM ----------
 const BPM = 96, BT = 60 / BPM, BAR = 4 * BT, mus = stereo();
-const CH = { Dm9: [50, 57, 60, 64, 65], Bbmaj7: [46, 53, 57, 62, 65], F: [41, 53, 57, 60, 65], C: [48, 55, 60, 64, 67], Dm: [50, 57, 62, 65, 69], Gm: [43, 55, 58, 62, 67], A: [45, 57, 61, 64, 69], 'C/E': [40, 55, 60, 64, 67], Bb: [46, 53, 58, 62, 65], Fadd9: [41, 53, 57, 60, 67] };
+const CH = { Dm9: [50, 57, 60, 64, 65], Bbmaj7: [46, 53, 57, 62, 65], F: [41, 53, 57, 60, 65], C: [48, 55, 60, 64, 67], Dm: [50, 57, 62, 65, 69], Gm: [43, 55, 58, 62, 67], A: [45, 57, 61, 64, 69], 'C/E': [40, 55, 60, 64, 67], Bb: [46, 53, 58, 62, 65], Fadd9: [41, 53, 57, 60, 67], C69: [48, 55, 60, 62, 69], Am7: [45, 57, 60, 64, 67], Fmaj7: [41, 57, 60, 64, 65], G6: [43, 55, 59, 62, 64], Em7: [40, 55, 59, 62, 64], Dm7: [38, 57, 60, 62, 65] };
 // [start s, chord, length s, section]
 const PLAN = [];
 const sec = (t0, t1, chords, name) => { let t = t0, i = 0; while (t < t1 - .05) { const len = Math.min(BAR, t1 - t); PLAN.push([t, chords[i % chords.length], len, name]); t += len; i++; } };
-sec(0, 4.45, ['Dm9', 'Dm9'], 'hook');
-sec(4.45, 14.8, ['Bbmaj7', 'F', 'C', 'Dm'], 'explain');
-sec(14.8, 24.85, ['Dm', 'Bb', 'Gm', 'A'], 'drama');
-sec(24.85, 28.45, ['F', 'C/E'], 'sun');
-sec(28.45, 32.85, ['Bb', 'C'], 'wobble');
-sec(32.85, DURN + .2, ['F', 'C/E', 'Dm', 'Bbmaj7', 'Fadd9'], 'outro');
-const MELO = { hook: [74, 72, 69, 72], explain: [77, 76, 72, 74, 69, 72], drama: [74, 77, 76, 73], sun: [81, 79, 77, 76], wobble: [77, 79, 77, 74], outro: [81, 79, 77, 76, 74, 72, 77] };
+// EDIT PER VIDEO: one sec() per story section, timed to the scene starts. Section names drive the arrangement:
+// 'hook' (pads + bells, no bass/arp), 'explain' / 'wobble' (pulse: kick, shaker, 8th plucks), 'drama' (16th plucks, heavier kick), 'outro' (louder bells).
+sec(0, 4.8, ['Am7', 'Fmaj7'], 'hook');
+sec(4.8, 24.3, ['Am7', 'Fmaj7', 'C69', 'G6'], 'explain');
+sec(24.3, 35.15, ['Dm7', 'Am7', 'Fmaj7', 'Em7'], 'wobble');
+sec(35.15, DURN + .2, ['Fmaj7', 'G6', 'Am7'], 'outro');
+// a documentary pulse in A minor (original): low pads, plucks and a music-box motif; serious but not alarming
+const MELO = { hook: [76, 72, 69, 71], explain: [76, 74, 72, 71, 69, 72], wobble: [77, 76, 74, 72], outro: [81, 79, 76, 72] };
 PLAN.forEach(([t, ch, len, name], bi) => {
   const notes = CH[ch];
   add(mus, t, pad(notes.slice(1).map(mtof), len + .6, name === 'drama' ? 900 : 1500), name === 'hook' ? .22 : .17, 0);
@@ -88,7 +89,7 @@ PLAN.forEach(([t, ch, len, name], bi) => {
   if (['explain', 'drama', 'wobble'].includes(name)) for (let s = 0, k = 0; s < len - .02; s += BT, k++) { add(mus, t + s, kick(), name === 'drama' ? .32 : .2, 0); add(mus, t + s + BT / 2, shaker(), .05, .5); }
 });
 // a soft riser into the first zoom and into the outro
-[[3.2, 1.25], [31.6, 1.25]].forEach(([t, d]) => { const n = Math.round(d * SR); add(mus, t, mul(svf(nz(n), x => 300 + 5000 * (x / d) ** 2, 1.5, 'bp'), x => (x / d) ** 2), .1, 0); });
+[[3.6, 1.2], [34.0, 1.1]].forEach   // EDIT: risers [start, length] into big reveals(([t, d]) => { const n = Math.round(d * SR); add(mus, t, mul(svf(nz(n), x => 300 + 5000 * (x / d) ** 2, 1.5, 'bp'), x => (x / d) ** 2), .1, 0); });
 // light stereo echo on the music bus
 for (let c = 0; c < 2; c++) { const D = Math.round((c ? .31 : .27) * SR), m = mus[c]; for (let i = D; i < N; i++) m[i] += m[i - D] * .22; }
 
@@ -114,10 +115,16 @@ const FX = {
   swell: d => { const n = Math.round(d * SR), o = mul(svf(nz(n), x => 500 + 6000 * (x / d) ** 2, 1, 'bp'), x => (x / d) ** 2 * .6); [65, 69, 72, 77].forEach(m => { const s = sine(n, mtof(m)); for (let i = 0; i < n; i++) o[i] += s[i] * .12 * (i / n) ** 1.5; }); return o; },
   tick: () => { const n = Math.round(.03 * SR); return mul(sine(n, 1900), env(n, .001, .012, 4)); },
   ding: () => bell(mtof(91), 1.4, 1),
+  water: d => { const n = Math.round(d * SR); return mul(svf(nz(n), 650, .7, 'lp'), x => (.55 + .45 * Math.sin(x * 2.1) * Math.sin(x * 3.7 + 1)) * Math.min(1, x / .6) * Math.min(1, (d - x) / .6)); },
+  splash: () => { const n = Math.round(.5 * SR), o = mul(svf(nz(n), x => 2200 - 1500 * x, 1, 'bp'), env(n, .005, .18, 4)); for (let k = 0; k < 4; k++) { const b = mul(sine(Math.round(.06 * SR), x => 500 + 900 * x / .06 + k * 120), env(Math.round(.06 * SR), .002, .03, 4)), at = Math.round((.08 + k * .05) * SR); b.forEach((v, i) => { if (at + i < n) o[at + i] += v * .3; }); } return o; },
+  motor: d => { const n = Math.round(d * SR), s = sine(n, 72), s2 = sine(n, 144), z = svf(nz(n), 300, 1, 'lp'); return s.map((v, i) => { const x = i / SR; return (v * .6 + s2[i] * .3 + z[i] * .4) * (.6 + .4 * Math.sin(2 * Math.PI * 16 * x)) * Math.min(1, x / .5) * Math.min(1, (d - x) / .6); }); },
+  grind: d => { const n = Math.round(d * SR), z = svf(nz(n), 900, 1.5, 'bp'), w = sine(n, 380); return z.map((v, i) => { const x = i / SR; return (v * (.6 + .4 * Math.sin(2 * Math.PI * 28 * x)) + w[i] * .15) * Math.min(1, x / .2) * Math.min(1, (d - x) / .4); }); },
+  thud: () => { const n = Math.round(.3 * SR); return mul(sine(n, t => 40 + 40 * Math.exp(-t * 25)), env(n, .002, .15, 4)); },
+  bubble: d => { const n = Math.round(d * SR), o = new Float32Array(n); for (let k = 0; k < d * 9; k++) { const m = Math.round(.05 * SR), f0 = 400 + 700 * rnd(), b = mul(sine(m, x => f0 + 1800 * x), env(m, .002, .025, 4)), at = Math.round(rnd() * (n - m)); b.forEach((v, i) => o[at + i] += v * .5); } return o; },
   chime: () => { const n = Math.round(2 * SR), o = new Float32Array(n); [77, 81, 84, 89].forEach((m, k) => { const s = bell(mtof(m), 1.6, .8), at = Math.round(k * .12 * SR); for (let i = 0; i < s.length && at + i < n; i++) o[at + i] += s[i] * .5; }); return o; },
 };
-const LEVEL = { pop: .32, pop2: .26, shimmer: .5, wobble: .18, boing: .25, whoosh: .32, swish: .2, zip: .25, paper: .35, wipe: .45, whirr: .09, hum: .14, brake: .1, click: .5, stamp: .55, swipe: .25, swell: .32, tick: .25, ding: .3, chime: .4 };
-for (const c of CUES) { if (!FX[c.type]) { console.warn('no sfx', c.type); continue; } add(fx, c.t, FX[c.type](c.d, c.g), (LEVEL[c.type] || .3) * (c.type === 'tick' ? c.g : 1), (rnd() - .5) * .4); }
+const LEVEL = { pop: .32, pop2: .26, shimmer: .5, wobble: .18, boing: .25, whoosh: .32, swish: .2, zip: .25, paper: .35, wipe: .45, whirr: .09, hum: .14, brake: .1, click: .5, stamp: .55, swipe: .25, swell: .32, tick: .25, ding: .3, chime: .4, water: .12, splash: .3, motor: .13, grind: .14, thud: .4, bubble: .2 };
+for (const c of CUES) { if (!FX[c.type]) { console.warn('no sfx', c.type); continue; } add(fx, c.t, FX[c.type](c.d, c.g), (LEVEL[c.type] || .3) * c.g, (rnd() - .5) * .4); }
 
 // ---------- write ----------
 function wav(path, [L, R]) {

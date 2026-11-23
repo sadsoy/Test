@@ -63,6 +63,13 @@ function star(x, y, r, inner = .45, n = 5, rot = -Math.PI / 2) {
   const P = []; for (let i = 0; i < n * 2; i++) { const a = rot + i * Math.PI / n, q = i % 2 ? r * inner : r; P.push([x + Math.cos(a) * q, y + Math.sin(a) * q]); }
   return poly(P);
 }
+// smooth open curve through points (Catmull-Rom), n samples per span (vessels, leader paths, graph lines)
+function through(P, n = 6) {
+  const out = [];
+  for (let i = 0; i < P.length - 1; i++) { const p0 = P[Math.max(0, i - 1)], p1 = P[i], p2 = P[i + 1], p3 = P[Math.min(P.length - 1, i + 2)];
+    for (let k = 0; k < n; k++) { const u = k / n, u2 = u * u, u3 = u2 * u; out.push([0, 1].map(d => .5 * (2 * p1[d] + (p2[d] - p0[d]) * u + (2 * p0[d] - 5 * p1[d] + 4 * p2[d] - p3[d]) * u2 + (3 * p1[d] - p0[d] - 3 * p2[d] + p3[d]) * u3))); } }
+  out.push(P[P.length - 1]); return out;
+}
 // a tapered strip along a path (arrows, beams, paper ribbons)
 function strip(P, w0, w1 = w0) {
   const L = [], R = [], n = P.length;
