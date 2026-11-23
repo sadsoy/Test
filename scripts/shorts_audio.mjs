@@ -1,7 +1,7 @@
 // shorts_audio.mjs: the music and sound effects of the clean-energy Short, made in code (no samples), and the mix.
 // The score follows the story arc (100 BPM, D minor → D major → suspense → warm, open ending); the SFX hit the same
 // beats as the picture: they read the narration timing (src/shorts/narration.js) and the phrase onsets (subs_th.js),
-// exactly as the scenes do. Writes out/shorts/audio/{music,sfx}.wav and the final mix.wav (-14 LUFS, -1.5 dBTP).
+// exactly as the scenes do. Writes out/shorts/audio/{music,sfx}.wav and the final mix.wav (-14 LUFS, -3 dBTP so the AAC encode stays under 0 dBFS).
 // The score is synthesized here because scripts/render_music.swift needs macOS; scripts/sfx.mjs is the model for the SFX.
 // Usage: node scripts/shorts_audio.mjs
 import fs from 'fs';
@@ -159,7 +159,7 @@ const v = (i, k) => `[${i}:a]aresample=48000,aformat=sample_fmts=fltp:channel_la
 const graph = last => [`${v(0, 'voice')},highpass=f=70,acompressor=threshold=0.1:ratio=3:attack=5:release=120,asplit=2[d][k]`, `${v(1, 'music')}[m]`,
   `[m][k]sidechaincompress=threshold=0.02:ratio=6:attack=40:release=500[md]`, `${v(2, 'sfx')}[s]`,
   `[d][md][s]amix=inputs=3:normalize=0,atrim=0:${DUR},afade=t=out:st=${(DUR - .6).toFixed(2)}:d=0.6,${last}[out]`].join(';');
-const inputs = Object.values(SRC).flatMap(f => ['-i', f]), base = 'loudnorm=I=-14:TP=-1.5:LRA=11';
+const inputs = Object.values(SRC).flatMap(f => ['-i', f]), base = 'loudnorm=I=-14:TP=-3:LRA=11';   // -3 dBTP: AAC overshoots ~2.5 dB
 const m = JSON.parse(/\{[^{}]*"input_i"[^{}]*\}/.exec(ff([...inputs, '-filter_complex', graph(`${base}:print_format=json`), '-map', '[out]', '-f', 'null', '-']))[0]);
 ff(['-y', ...inputs, '-filter_complex', graph(`${base}:linear=true:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset},aresample=48000`),
   '-map', '[out]', '-c:a', 'pcm_s24le', 'out/shorts/audio/mix.wav']);

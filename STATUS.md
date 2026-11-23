@@ -69,9 +69,9 @@ code, Ghibli-inspired, built with ClaudeAnimationBase (copied from P Doom).
   bank (Apple licence); SFX are synthesized in code.
 
 ## Short: ถ้าโลกเปลี่ยนไปใช้พลังงานสะอาดทั้งหมด? (2026-11-23)
-- Done: 39.9 s, 1080×1920, 30 fps, paper-cut style → `out/shorts/clean-energy_shorts.mp4` (+ `_720p`). Docs in
+- Done v2 (user: too rushed, may run to 1 min): 55.9 s natural-speed narration (v1 was 39.9 s at 1.25×), 1080×1920, 30 fps, paper-cut style → `out/shorts/clean-energy_shorts.mp4` (+ `_720p`). Docs in
   `shorts/clean-energy/` (SCRIPT, STORYBOARD, ASSETS, QC). Page `shorts.html` (`render.mjs --page=shorts.html --fps=30`).
 - Rebuild: TTS take (`scripts/shorts_tts.py shorts/clean-energy/full3.json out/shorts/voice/take Puck gemini-2.5-flash-preview-tts`)
   → `scripts/shorts_voice.py <take> <cuts>` → re-check `src/shorts/phrases.js` → `node scripts/shorts_audio.mjs` →
   `render.mjs --page=shorts.html --fps=30 --frames --workers=4 --framesdir=out/shorts/frames` → ffmpeg mux with mix.wav.
-- Open: a human listen for levels and music; n02 "ราว" is spoken short (heard as "เรา" by the transcriber).
+- Open: a human listen for levels and music (and n01's first words). n02 re-recorded as "ราวๆ" (fixed).
