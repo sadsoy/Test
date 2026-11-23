@@ -2,8 +2,8 @@
 const DUR = TL.duration, PROJECT = { duration: DUR, audio: 'out/audio/mix.wav' };
 // at each scene start: 'fade' (the old scene dissolves out over d s), 'wipe' (a torn sheet sweeps over, cut under it), 'cut'
 const TRANS = {
-  5.0: { type: 'fade', d: .35 }, 9.15: { type: 'fade', d: .35 }, 12.7: { type: 'fade', d: .35 },
-  18.7: { type: 'wipe', d: .62, col: '#F8D29A', col2: '#E9A07A', dir: 1 }, 28.6: { type: 'wipe', d: .62, col: '#3A3258', col2: '#2A2440', dir: -1 }, 34.3: { type: 'fade', d: .45 },
+  5.15: { type: 'fade', d: .35 }, 9.1: { type: 'fade', d: .35 }, 15.25: { type: 'fade', d: .35 },
+  19.85: { type: 'wipe', d: .62, col: '#F8D29A', col2: '#E9A07A', dir: 1 }, 29.45: { type: 'wipe', d: .62, col: '#3A3258', col2: '#2A2440', dir: -1 }, 34.95: { type: 'fade', d: .45 },
 };
 const MAIN = X, OFF = document.createElement('canvas'); OFF.width = W; OFF.height = H; const OFFX = OFF.getContext('2d');
 function drawScene(fn, t, ctx) {

@@ -2,10 +2,26 @@
 
 | | |
 |---|---|
-| Video | `deliver/fusion_sun_shorts.mp4`: 1080×1920 (9:16), 30 fps, H.264 + AAC 192k, **39.30 s** |
+| Video | `deliver/fusion_sun_shorts.mp4`: 1080×1920 (9:16), 30 fps, H.264 + AAC 192k, **39.60 s** |
 | Preview | `deliver/fusion_sun_preview_540p.mp4` (540×960, for a phone) |
 | Contact sheet | `deliver/contact_sheet.jpg` · asset sheet: `out/check/assets.jpg` and `out/check/tok.jpg` (tokamak) |
 | Made with | The `paper-shorts` skill (cut paper on Canvas2D) |
+
+## Revision 2 (after feedback: "ไม่รู้ว่ามันคือดวงอาทิตย์เทียม")
+
+The narration never said "ดวงอาทิตย์เทียม", and the picture didn't tie the machine to the Sun. What changed:
+- **Voice:**
+  - L2 is now "ถ้าเราสร้าง**ดวงอาทิตย์เทียม**บนโลกได้ล่ะ?".
+  - A new line, L4b, "นี่แหละ ที่เรียกกันว่า ดวงอาทิตย์เทียม", follows the tokamak.
+  - The spoken "ปี 2022" was dropped (it's on screen) to keep the length.
+  - The pickups use the same TTS model and voice and are spliced into the original take.
+- **Picture:**
+  - The spark lands on Earth as a small paper sun, with the label "ดวงอาทิตย์เทียม?".
+  - In the tokamak scene, the corona rays from the opening Sun spread behind the machine, and a small sun drops into the ring to become the plasma.
+  - A **"ดวงอาทิตย์เทียม · ชื่อเล่นของเครื่องฟิวชัน เช่น โทคาแมค"** stamp lands.
+  - A **"ไทยก็มี! TT-1 · สทน. นครนายก · เดินเครื่อง ก.ค. 2566 · เครื่องแรกในเอเชียตะวันออกเฉียงใต้"** card appears.
+  - The plant label reads "ดวงอาทิตย์เทียม → ไฟทั้งเมือง", and the closing title is "ดวงอาทิตย์เทียม · ถ้าสร้างบนโลกได้สำเร็จ?".
+- **TT-1 source:** [Bangkok Post](https://www.bangkokpost.com/thailand/general/2467980/1st-nuclear-fusion-device-to-start-operations-in-march), [Wikipedia: Thailand Tokamak-1](https://en.wikipedia.org/wiki/Thailand_Tokamak-1). It is a small research tokamak donated by ASIPP (China), used for training.
 
 ## Story arc
 
@@ -42,10 +58,11 @@ Rules from the brief and how the clip meets them:
 | # | Time (s) | Line |
 |---|---|---|
 | L1 | 0.18–2.84 | ดวงอาทิตย์ส่องแสง / เพราะมันหลอมอะตอมเข้าด้วยกัน |
-| L2 | 3.06–4.76 | ถ้าเราจุดไฟแบบนั้นบนโลกได้ล่ะ? |
+| L2 | 3.00–4.95 | ถ้าเราสร้างดวงอาทิตย์เทียมบนโลกได้ล่ะ? |
 | L3 | 5.18–8.98 | นี่คือฟิวชัน / รวมอะตอมเบา / ต่างจากฟิชชัน / ที่แยกอะตอมหนัก |
 | L4 | 9.30–12.51 | ต้องร้อนกว่าแกนดวงอาทิตย์สิบเท่า / และขังพลาสมาไว้ด้วยแม่เหล็ก |
-| L5 | 12.83–18.50 | ปี 2022 / ปฏิกิริยาให้พลังงานเกินเลเซอร์ที่ยิงเข้าไปได้ / แต่ทั้งระบบยังใช้ไฟมากกว่า |
+| L4b | 12.56–15.02 | นี่แหละ / ที่เรียกกันว่า / ดวงอาทิตย์เทียม |
+| L5 | 15.39–19.72 | ปฏิกิริยาให้พลังงานเกินเลเซอร์ที่ยิงเข้าไปได้ / แต่ทั้งระบบยังใช้ไฟมากกว่า |
 | L6 | 18.87–21.37 | สมมติว่าวันหนึ่ง / มันผลิตไฟสุทธิได้จริง |
 | L7 | 21.64–25.07 | เชื้อเพลิงมาจากน้ำทะเลและลิเทียม / ไม่ปล่อยคาร์บอนตอนผลิตไฟ |
 | L8 | 25.34–28.42 | พลังงานเหลือเฟือ / อาจเปลี่ยนน้ำทะเลเป็นน้ำจืดให้ทั้งเมือง |
@@ -79,10 +96,10 @@ Rules from the brief and how the clip meets them:
 
 | Check | Result |
 |---|---|
-| Length | **39.30 s** ✅ |
+| Length | **39.60 s** ✅ (after adding the "ดวงอาทิตย์เทียม" line) |
 | 1080×1920, 30 fps, MP4 | ✅ |
-| Loudness | −13.9 LUFS, peak −2.4 dBFS ✅ |
-| Voice over music + SFX (speech band) | At least **+11.2 dB** on every phrase (median +16.4). **Fixed:** the ending chime and swell and the plant's motor and whirr left only +7.6–8.2 dB; they were lowered. ✅ |
+| Loudness | −13.9 LUFS, peak −1.7 dBFS ✅ |
+| Voice over music + SFX (speech band) | Rev. 2: at least **+9.8 dB** on every phrase (median +15.5). **Fixed:** the ending chime and swell and the plant's motor and whirr left only +7.6–8.2 dB; they were lowered. ✅ |
 | Reactor and science shapes | **Fixed:** the tokamak coils came out as curved strips at random angles (wrong); they are now D-shaped loops wrapped round the tube cross-section, edge-on at the front and back as in reality. Nucleus counts checked (D 1p+1n, T 1p+2n, He-4 2p+2n). U-235 is labelled "ภาพย่อส่วน" (simplified picture). ✅ |
 | Facts | See the table: fusion vs fission kept apart; reaction vs whole system kept apart; waste not zero; no claim that a sun has been built; no year for commercial plants ✅ |
 | Readable text | **Fixed:** nuclei too small and panels empty; the temperature and energy-bar text too small; the "สถานการณ์สมมติ" stamp overlapping the next label; the S5 scene sitting against the subtitles; the caveat card text running off the cards. ✅ |

@@ -2,9 +2,9 @@
 // Speech phrases come from ffmpeg silencedetect; PHR says how many phrases each script line has in the take.
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
-const SRC = 'out/voice/full.wav', TEMPO = 1.13, LEAD = .15, TAIL = 1.0, PRE = .03, POST = .05, INNER = .07;
-const PHR = [2, 1, 4, 2, 3, 2, 2, 2, 4, 2];
-const AFTER = [.15, .35, .25, .25, .3, .2, .2, .3, .3, 0];
+const SRC = 'out/voice/full.wav', TEMPO = 1.16, LEAD = .15, TAIL = .85, PRE = .03, POST = .05, INNER = .07;
+const PHR = [2, 1, 4, 2, 3, 2, 2, 2, 2, 4, 2];
+const AFTER = [.15, .25, .2, .12, .3, .15, .2, .2, .25, .25, 0];
 const lines = JSON.parse(readFileSync('scripts/lines.json', 'utf8'));
 const log = execFileSync('ffmpeg', ['-i', SRC, '-af', 'silencedetect=noise=-38dB:d=0.25', '-f', 'null', '-'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).toString();
 const err = execFileSync('sh', ['-c', `ffmpeg -i ${SRC} -af silencedetect=noise=-38dB:d=0.25 -f null - 2>&1`]).toString();

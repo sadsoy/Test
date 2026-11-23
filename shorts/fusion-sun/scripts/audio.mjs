@@ -68,11 +68,11 @@ const CH = { Dm9: [50, 57, 60, 64, 65], Bbmaj7: [46, 53, 57, 62, 65], F: [41, 53
 const PLAN = [];
 const sec = (t0, t1, chords, name) => { let t = t0, i = 0; while (t < t1 - .05) { const len = Math.min(BAR, t1 - t); PLAN.push([t, chords[i % chords.length], len, name]); t += len; i++; } };
 // EDIT PER VIDEO: one sec() per story section, timed to the scene starts.
-sec(0, 5.0, ['Am7', 'Fmaj7'], 'hook');
-sec(5.0, 18.7, ['Am7', 'Fmaj7', 'C69', 'G6'], 'explain');
-sec(18.7, 28.6, ['Fmaj7', 'C69', 'G6', 'Am7'], 'wobble');
-sec(28.6, 34.3, ['Dm7', 'Am7'], 'hook');
-sec(34.3, DURN + .2, ['Fmaj7', 'G6', 'C69'], 'outro');
+sec(0, 5.15, ['Am7', 'Fmaj7'], 'hook');
+sec(5.15, 19.85, ['Am7', 'Fmaj7', 'C69', 'G6'], 'explain');
+sec(19.85, 29.45, ['Fmaj7', 'C69', 'G6', 'Am7'], 'wobble');
+sec(29.45, 34.95, ['Dm7', 'Am7'], 'hook');
+sec(34.95, DURN + .2, ['Fmaj7', 'G6', 'C69'], 'outro');
 // discovery in A minor → C (original): a hushed opening, a steady pulse through the science, brighter in the what-if,
 // quiet again for the caveats, and an opening-up chord at the end
 const MELO = { hook: [76, 72, 71, 69], explain: [76, 79, 81, 79, 76, 74], wobble: [79, 81, 84, 81], outro: [84, 81, 79, 76, 79, 84] };
@@ -91,7 +91,7 @@ PLAN.forEach(([t, ch, len, name], bi) => {
 });
 // a soft riser into the first zoom and into the outro
 // EDIT: risers [start, length] into big reveals
-[[17.5, 1.2], [33.2, 1.1]].forEach(([t, d]) => { const n = Math.round(d * SR); add(mus, t, mul(svf(nz(n), x => 300 + 5000 * (x / d) ** 2, 1.5, 'bp'), x => (x / d) ** 2), .1, 0); });
+[[11.6, 1.1], [18.7, 1.1], [33.8, 1.1]].forEach(([t, d]) => { const n = Math.round(d * SR); add(mus, t, mul(svf(nz(n), x => 300 + 5000 * (x / d) ** 2, 1.5, 'bp'), x => (x / d) ** 2), .1, 0); });
 // light stereo echo on the music bus
 for (let c = 0; c < 2; c++) { const D = Math.round((c ? .31 : .27) * SR), m = mus[c]; for (let i = D; i < N; i++) m[i] += m[i - D] * .22; }
 

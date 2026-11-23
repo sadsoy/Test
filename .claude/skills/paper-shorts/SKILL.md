@@ -143,6 +143,11 @@ Read each image yourself. Check:
 - **Turning a cutout:** never flip `X.scale(-1, 1)` in one frame. Ease the x-scale through a thin edge over about 0.2 s.
 - **What-if topics:** stamp the hypothetical ("สถานการณ์สมมติ · WHAT IF") before it starts, show today's facts (with
   sources) first, and label proposed solutions as "still debated".
+- **Name the concept the title promises, in the voice and in the picture.** The fusion clip first never said
+  "ดวงอาทิตย์เทียม", and the user couldn't tell what the machine was. Say the popular name early, add a visual
+  metaphor that links it (the Sun's corona behind the tokamak), and use a local hook where one exists (Thailand's TT-1).
+- **Voice pickups:** record only the new phrases with the same model and voice, then splice them into the take's
+  phrase list with 0.6 s gaps and rebuild with `split.mjs`. There is no need to re-record the whole script.
 - **Science diagrams:** draw them from geometry, not by eye. For example, a toroidal coil is a loop in the plane of the
   vertical axis and the radius, so it is edge-on at the front and back. Check them on an asset sheet before animating.
 - **Comments in audio.mjs:** a `//` comment placed mid-line silently disables the rest of that line (this disabled
