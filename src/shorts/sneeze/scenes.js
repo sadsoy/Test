@@ -152,7 +152,7 @@
   function s7(t, lt, dur) {
     const end = t - lt + dur, letIt = ph('n09', 1), cover = ph('n09', 2), safe = NT.n10[0], others = ph('n10', 1);
     pcBegin('#BFE8D3'); sky('#D6F2E4', '#BFE8D3', '#9FD8BE');
-    pcCam(kf(t, [[NT.n09[0] - .2, 540], [safe, 540], [end, 600]]), 1000, kf(t, [[NT.n09[0] - .2, 1.06], [safe, 1.0], [end, .96]]));
+    pcCam(kf(t, [[NT.n09[0] - .2, 520], [cover, 470], [safe, 540], [end, 600]]), 1000, kf(t, [[NT.n09[0] - .2, 1.06], [cover, 1.14], [safe, 1.0], [end, .96]]));   // pushes in on the elbow, then pulls out to the friends
     layer(1, () => {
       const x = 400, y = 1560, hx = x, hy = y - 440 * 1.05;
       const sneeze = seg(t, letIt, letIt + .3), arm = ease(seg(t, cover - .3, cover + .2));
