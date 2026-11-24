@@ -160,7 +160,7 @@
     const end = t - lt + dur, every = ph('n10', 1), seven = ph('n10', 2);
     pcBegin('#2B3566'); sky('#222B58', '#2B3566', '#3A4580'); stars(t, 1);
     pcCam(540, 1000, kf(t, [[NT.n10[0] - .2, 1.06], [seven, 1.0], [end, .98]]));
-    layer(.2, () => moon(840, 380, 60));
+    layer(.2, () => moon(880, 640, 56));   // below the titles
     layer(1, () => {
       bed(560, 1150, 1.3, t);
       zzz(470, 870, t, 1);

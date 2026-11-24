@@ -104,3 +104,9 @@ code, Ghibli-inspired, built with ClaudeAnimationBase (copied from P Doom).
 - Done: 39.2 s → `out/shorts/nails/nails_shorts.mp4` (+ `_720p`). Docs `shorts/nails/`, code `src/shorts/nails/`, page `shorts_nails.html`.
   Rebuild: `SHORT=nails python3 -I scripts/shorts_voice.py shorts/nails/take1.wav =4.37,=7.88,=11.09,=13.80,=17.34,=19.70,=22.18,=25.25,=29.64,=33.65`
   → `shorts_checkcuts.py` → `SHORT=nails node scripts/shorts_audio.mjs` → render `--page=shorts_nails.html`.
+
+## Short: นอนชดเชยวันหยุดทดแทนการอดนอนได้ไหม? (2026-11-24)
+- Done: 39.77 s → `out/shorts/sleepdebt/sleepdebt_shorts.mp4` (+ `_720p`). Docs `shorts/sleepdebt/`, code `src/shorts/sleepdebt/`.
+  Rebuild: `SHORT=sleepdebt python3 -I scripts/shorts_voice.py shorts/sleepdebt/take1.wav =4.11,=8.64,=13.15,=17.21,=21.22,=25.52,=26.85,=32.35,=35.40,=39.66`
+  → `shorts_checkcuts.py` → `SHORT=sleepdebt node scripts/shorts_audio.mjs` → render `--page=shorts_sleepdebt.html`.
+- Rule learned: never let a chart imply numbers the sources don't give (the weekend bars were redrawn as a debt bucket).
