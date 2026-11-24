@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sneeze Short studio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&display=block">
+<style>
+  html, body { margin: 0; background: #1b1820; color: #eee; font: 13px system-ui, sans-serif; }
+  main { padding: 12px; display: grid; gap: 8px; justify-items: start; }
+  #out { height: min(86vh, 1920px); aspect-ratio: 9 / 16; width: auto; background: #F3EBDC; }
+  .p5Canvas { display: none !important; }
+  .bar { display: flex; gap: 10px; align-items: center; width: 480px; }
+  #scrub { flex: 1; }
+  #tt { font-variant-numeric: tabular-nums; min-width: 150px; }
+</style>
+<script src="node_modules/p5/lib/p5.min.js"></script>
+<script src="node_modules/p5.brush/dist/p5.brush.js"></script>
+</head>
+<body>
+<main>
+  <canvas id="out" width="1080" height="1920"></canvas>
+  <div class="bar"><input id="scrub" type="range" min="0" max="60" step="0.0333" value="0"><span id="tt">loading…</span></div>
+</main>
+<!-- the engine (shared with studio.html) -->
+<script src="src/shorts/sneeze/narration.js"></script>
+<script src="src/shorts/sneeze/config.js"></script>
+<script src="src/core.js"></script>
+<script src="src/timeline.js"></script>
+<!-- the Short -->
+<script src="src/shorts/sneeze/phrases.js"></script>
+<script src="src/shorts/paper.js"></script>
+<script src="src/shorts/props.js"></script>
+<script src="src/shorts/subs_th.js"></script>
+<script src="src/shorts/sleepy/props.js"></script>
+<script src="src/shorts/sweat/props.js"></script>
+<script src="src/shorts/nails/props.js"></script>
+<script src="src/shorts/sneeze/props.js"></script>
+<script src="src/shorts/sneeze/scenes.js"></script>
+</body>
+</html>
