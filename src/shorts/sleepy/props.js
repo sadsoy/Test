@@ -10,6 +10,7 @@ const SLP = { skin: '#F4C9A2', skinDk: '#E3AD84', hair: '#3B2A2A', shirt: '#2F9C
 // ---------- the character: "อิ่ม", a round paper person seen from the front ----------
 // o: lid 0..1 (eyelids closed), nod (rad, head tilt), bob (px, head drop), mouth 0..1 (open, a yawn at 1), smile -1..1,
 // belly 0..1 (full), arm: [left, right] raise 0..1, walk (phase, legs swing), legs (draw legs), look (px, pupils).
+// shirt (colour, default teal), band (colour of a sports headband, none by default).
 function person(x, y, s, o = {}) {
   const lid = clamp(o.lid ?? 0), nod = o.nod ?? 0, mouth = clamp(o.mouth ?? 0), belly = clamp(o.belly ?? 0), arm = o.arm || [0, 0];
   const S = v => v * s, wk = o.walk ?? null;
@@ -24,17 +25,18 @@ function person(x, y, s, o = {}) {
   const armAt = side => { const up = side < 0 ? arm[0] : arm[1], sx = x + S(side * 78), sy = y - S(300);
     const a = lerp(.25, 2.6, up) * side, swing = wk == null ? 0 : Math.sin(wk + (side < 0 ? Math.PI : 0)) * .35;
     const ex = sx + Math.sin(a + swing) * S(130), ey = sy + Math.cos(a + swing) * S(130);
-    strip([[sx, sy], [ex, ey]], SLP.shirt, S(34), 1); cut(Pc(ex, ey, S(20)), SLP.skin, 1); };
+    strip([[sx, sy], [ex, ey]], o.shirt || SLP.shirt, S(34), 1); cut(Pc(ex, ey, S(20)), SLP.skin, 1); };
   armAt(-1); armAt(1);
   // torso with a belly that rounds out when full
   const bw = S(108 + 26 * belly);
-  cut(Pblob([[x - S(92), y - S(330)], [x + S(92), y - S(330)], [x + bw, y - S(210)], [x + S(96), y - S(110)], [x - S(96), y - S(110)], [x - bw, y - S(210)]]), SLP.shirt, 2, { edge: .2 });
-  cut(Pe(x, y - S(205), S(40 + 30 * belly), S(30 + 22 * belly)), SLP.shirtDk, 0, { tex: .4, alpha: .35 + .4 * belly });
+  cut(Pblob([[x - S(92), y - S(330)], [x + S(92), y - S(330)], [x + bw, y - S(210)], [x + S(96), y - S(110)], [x - S(96), y - S(110)], [x - bw, y - S(210)]]), o.shirt || SLP.shirt, 2, { edge: .2 });
+  cut(Pe(x, y - S(205), S(40 + 30 * belly), S(30 + 22 * belly)), o.shirt ? mixCol(o.shirt, '#000000', .2) : SLP.shirtDk, 0, { tex: .4, alpha: .35 + .4 * belly });
   // head (tilts and drops as a unit)
   const hx = x, hy = y - S(440) + (o.bob ?? 0);
   PX.save(); PX.translate(hx, hy); PX.rotate(nod);
   cut(Pc(0, 0, S(118)), SLP.skin, 3, { edge: .2 });
   cut(Pblob([[-S(122), S(6)], [-S(116), -S(66)], [-S(60), -S(118)], [S(20), -S(126)], [S(96), -S(92)], [S(124), -S(10)], [S(92), -S(56)], [S(20), -S(70)], [-S(56), -S(64)], [-S(96), -S(24)]]), SLP.hair, 1);
+  if (o.band) cut(Pblob([[-S(118), -S(30)], [-S(60), -S(70)], [S(60), -S(70)], [S(118), -S(30)], [S(116), -S(8)], [S(60), -S(46)], [-S(60), -S(46)], [-S(116), -S(8)]]), o.band, 1, { edge: .3 });
   for (const side of [-1, 1]) {
     const ex = S(side * 44), ey = S(6);
     cut(Pe(ex, ey, S(17), S(21)), '#FFFFFF', 0, { tex: .2 });

@@ -73,14 +73,13 @@ function hills(y, amp, f, ph, x0 = -400, x1 = W + 400, bottom = H + 600, n = 40)
 // ---------- paper ----------
 const SHADE = 'rgba(38,24,14,';
 function cut(path, col, lv = 1, o = {}) {
-  const c = PX;
-  c.save();
-  if (o.alpha != null) c.globalAlpha = o.alpha;
+  const c = PX, base = c.globalAlpha, al = base * (o.alpha ?? 1);   // o.alpha multiplies a fade already set on the context
+  c.save(); c.globalAlpha = al;
   if (lv > 0) { c.shadowColor = SHADE + (o.sa ?? .34) + ')'; c.shadowBlur = 3 + lv * 7; c.shadowOffsetX = lv * 1.5; c.shadowOffsetY = 1.5 + lv * 4; }
   c.fillStyle = col; c.fill(path, o.rule || 'nonzero');
   c.shadowColor = 'transparent';
-  if (o.tex !== 0) { c.globalCompositeOperation = 'multiply'; c.globalAlpha = (o.alpha ?? 1) * (o.tex ?? .7); c.fillStyle = FIBER; c.fill(path, o.rule || 'nonzero'); }
-  if (o.edge) { c.globalCompositeOperation = 'source-over'; c.globalAlpha = (o.alpha ?? 1) * o.edge; c.strokeStyle = '#FFFFFF'; c.lineWidth = 2; c.stroke(path); }
+  if (o.tex !== 0) { c.globalCompositeOperation = 'multiply'; c.globalAlpha = al * (o.tex ?? .7); c.fillStyle = FIBER; c.fill(path, o.rule || 'nonzero'); }
+  if (o.edge) { c.globalCompositeOperation = 'source-over'; c.globalAlpha = al * o.edge; c.strokeStyle = '#FFFFFF'; c.lineWidth = 2; c.stroke(path); }
   c.restore();
 }
 // light that glows (energy, flares, lamps): additive, with no paper texture
@@ -94,7 +93,7 @@ function hexRGB(h) { const v = parseInt(h.slice(1), 16); return [(v >> 16) & 255
 function rgba(h, a) { const [r, g, b] = hexRGB(h); return `rgba(${r},${g},${b},${a})`; }
 // a thin paper strip (cables, pipes, string): a stroked path with a shadow
 function strip(pts, col, w = 6, lv = 1, o = {}) {
-  const c = PX; c.save(); if (o.alpha != null) c.globalAlpha = o.alpha;
+  const c = PX; c.save(); c.globalAlpha *= (o.alpha ?? 1);
   if (lv > 0) { c.shadowColor = SHADE + (o.sa ?? .3) + ')'; c.shadowBlur = 2 + lv * 5; c.shadowOffsetX = lv; c.shadowOffsetY = 1 + lv * 3; }
   c.strokeStyle = col; c.lineWidth = w; c.lineCap = o.cap || 'round'; c.lineJoin = 'round';
   c.beginPath(); pts.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); if (o.close) c.closePath(); c.stroke(); c.restore();
@@ -119,7 +118,8 @@ function pulses(P, t, n = 3, speed = .5, col = '#FFE27A', r = 10, a = 1) {
 // pop (0..1 scale-in), lv (shadow), card (colour of a backing strip), spacing.
 function ptext(txt, x, y, size, col, o = {}) {
   const c = PX, k = o.pop != null ? backOut(o.pop) : 1; if (k <= .01 || (o.alpha ?? 1) <= 0) return 0;
-  c.save(); c.translate(x, y); c.rotate(o.rot || 0); c.scale(k, k); c.globalAlpha = clamp(o.alpha ?? 1);
+  const base = PX.globalAlpha;
+  c.save(); c.translate(x, y); c.rotate(o.rot || 0); c.scale(k, k); c.globalAlpha = base * clamp(o.alpha ?? 1);
   c.font = `${o.weight || 600} ${size}px ${FONT}`; c.textAlign = o.align || 'center'; c.textBaseline = 'middle';
   if (o.spacing) c.letterSpacing = o.spacing + 'px';
   const w = c.measureText(txt).width;
@@ -128,7 +128,7 @@ function ptext(txt, x, y, size, col, o = {}) {
     c.shadowColor = SHADE + '.35)'; c.shadowBlur = 16; c.shadowOffsetX = 3; c.shadowOffsetY = 8;
     c.fillStyle = o.card; const p = Pr(ax, -size * .78, w + 2 * px, size * 1.5, size * .2); c.fill(p);
     c.shadowColor = 'transparent'; c.globalCompositeOperation = 'multiply'; c.globalAlpha *= .7; c.fillStyle = FIBER; c.fill(p);
-    c.globalCompositeOperation = 'source-over'; c.globalAlpha = clamp(o.alpha ?? 1);
+    c.globalCompositeOperation = 'source-over'; c.globalAlpha = base * clamp(o.alpha ?? 1);
   }
   const lv = o.lv ?? 2;
   if (lv > 0) { c.shadowColor = SHADE + '.4)'; c.shadowBlur = 3 + lv * 5; c.shadowOffsetX = lv * 1.2; c.shadowOffsetY = 1 + lv * 3; }
