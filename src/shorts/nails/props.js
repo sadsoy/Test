@@ -21,12 +21,41 @@ function fingertip(x, y, s, o = {}) {
   cut(Pe(nx0 + S(40), ny + S(8), S(26), S(16)), '#FCEDEA', 0, { tex: .2 });
   // skin fold (cuticle) over the base of the nail: retracts to the left by up to 80 px
   const fx = nx0 + S(70) - S(80) * back;
-  cut(Pblob([[fx - S(150), ny + S(10)], [fx - S(60), ny - S(16)], [fx - S(6), ny - S(12)], [fx + S(14), ny + S(6)], [fx, ny + S(34)], [fx - S(150), ny + S(40)]]), skin, 2, { edge: .2 });
-  strip([[fx + S(2), ny - S(8)], [fx + S(12), ny + S(8)], [fx + S(2), ny + S(26)]], skinDk, S(5), 0);     // the cuticle edge
+  cut(Pblob([[fx - S(150), ny + S(2)], [fx - S(40), ny - S(2)], [fx + S(8), ny + S(6)], [fx + S(4), ny + S(32)], [fx - S(150), ny + S(36)]]), skin, 0, { tex: .5 });   // skin over the nail root, flush
+  strip([[fx + S(2), ny - S(2)], [fx + S(8), ny + S(10)], [fx + S(2), ny + S(28)]], skinDk, S(4), 0);     // the cuticle edge
   // the fingertip pulp under the free edge also pulls back
-  const tipX = x + S(226) - S(40) * back;
-  cut(Pblob([[x + S(120), y - S(56)], [tipX, y - S(50)], [tipX + S(26), y + S(4)], [tipX - S(8), y + S(64)], [x + S(120), y + S(88)]]), skin, 1);
+  if (back > 0) { const tipX = x + S(226) - S(40) * back;
+    cut(Pblob([[x + S(120), y - S(56)], [tipX, y - S(50)], [tipX + S(26), y + S(4)], [tipX - S(8), y + S(64)], [x + S(120), y + S(88)]]), skin, 0); }
   return { nailStart: fx, nailEnd: nx0 + S(len) + S(14), ny };
+}
+// a finger seen from above, pointing up, base at (x, y). The nail plate is fixed (top at nailTop, base at nailBase);
+// back 0..1 slides the skin fold at the nail root down (and the side folds out), so more of the same nail shows.
+// hidden: alpha of a dashed outline of the part of the nail under the skin. Returns { top, cut } y of the visible nail.
+function fingerTop(x, y, s, o = {}) {
+  const S = v => v * s, back = clamp(o.back ?? 0), dry = clamp(o.dry ?? back), w = S(110), top = y - S(520);
+  const skin = mixCol(NAI.skin, NAI.skinDry, dry), skinDk = mixCol(NAI.skinDk, '#C4977E', dry);
+  cut(Pr(x - w, top, 2 * w, S(560), w), skin, 3, { edge: .2 });
+  for (let k = 0; k < 3; k++) strip([[x - S(50), y - S(130) + k * S(14)], [x + S(50), y - S(126) + k * S(14)]], skinDk, S(4), 0);   // knuckle creases
+  const nw = S(150), nTop = top + S(14), nBase = top + S(250);
+  const fold = nBase - S(60) + S(70) * back, side = S(16) * (1 - back);      // the cuticle line moves down as the skin shrinks
+  cut(Pr(x - nw / 2, nTop, nw, nBase - nTop, [S(70), S(70), S(24), S(24)]), NAI.nail, 2, { edge: .45 });
+  cut(Pr(x - nw / 2, nTop, nw, S(40), [S(70), S(70), 0, 0]), NAI.nailTip, 0, { tex: .2 });
+  cut(Pe(x, fold - S(4), S(48), S(26)), '#FCEDEA', 0, { tex: .2 });                                   // lunula
+  // skin over the nail root and the sides (hides the hidden part of the plate)
+  const P = new Path2D(); P.moveTo(x - w, fold + S(30)); P.lineTo(x - nw / 2 - S(4), fold + S(30)); P.quadraticCurveTo(x, fold - S(36), x + nw / 2 + S(4), fold + S(30)); P.lineTo(x + w, fold + S(30)); P.lineTo(x + w, y + S(40)); P.lineTo(x - w, y + S(40)); P.closePath();
+  cut(P, skin, 0, { tex: .7 });                       // same colour and fibres as the finger: no seam
+  PX.save(); PX.strokeStyle = skinDk; PX.lineWidth = S(5); PX.lineCap = 'round'; PX.shadowColor = SHADE + '.25)'; PX.shadowBlur = S(6); PX.shadowOffsetY = -S(2);
+  PX.beginPath(); PX.moveTo(x - nw / 2 - S(4), fold + S(30)); PX.quadraticCurveTo(x, fold - S(36), x + nw / 2 + S(4), fold + S(30)); PX.stroke(); PX.restore();   // the cuticle: a smooth arch
+  if (side > .5) for (const sd of [-1, 1]) cut(Pr(sd < 0 ? x - nw / 2 - S(2) : x + nw / 2 - side + S(2), nTop + S(60), side, fold - nTop - S(40), S(6)), skin, 0, { tex: .4 });
+  if (o.hidden > 0) { PX.save(); PX.globalAlpha *= o.hidden; PX.setLineDash([S(10), S(8)]); PX.strokeStyle = '#B5483A'; PX.lineWidth = S(4);
+    PX.beginPath(); PX.moveTo(x - nw / 2, fold + S(10)); PX.lineTo(x - nw / 2, nBase - S(24)); PX.quadraticCurveTo(x - nw / 2, nBase, x - nw / 2 + S(24), nBase); PX.lineTo(x + nw / 2 - S(24), nBase); PX.quadraticCurveTo(x + nw / 2, nBase, x + nw / 2, nBase - S(24)); PX.lineTo(x + nw / 2, fold + S(10)); PX.stroke(); PX.restore(); }
+  return { top: nTop, cut: fold - S(4), base: nBase };
+}
+// a vertical ruler from a (top) to b at x, with a label
+function rulerV(x, a, b, label, col, alpha = 1) {
+  if (alpha <= 0) return;
+  strip([[x, a], [x, b]], col, 8, 1, { alpha }); strip([[x - 16, a], [x + 16, a]], col, 6, 0, { alpha }); strip([[x - 16, b], [x + 16, b]], col, 6, 0, { alpha });
+  if (label) ptext(label, x, b + 36, 30, col, { lv: 0, weight: 700, alpha });
 }
 // a ruler under a span [a, b] at y with a label
 function rulerSpan(a, b, y, label, col = '#2E9C8E', alpha = 1) {

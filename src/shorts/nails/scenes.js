@@ -150,12 +150,14 @@
     const end = t - lt + dur, stub = ph('n09', 1), looks = ph('n09', 2);
     pcBegin('#DCEAF7'); sky('#E8F2FB', '#DCEAF7', '#C4DAEE');
     pcCam(540, 960, kf(t, [[NT.n09[0] - .2, 1.04], [end, 1.0]]));
-    const back = ease(seg(t, NT.n09[0] + .2, stub)), drop = ease(seg(t, stub, looks + .2));
+    const back = ease(seg(t, NT.n09[0] + .5, stub + .6)), drop = ease(seg(t, stub + .1, looks + .3));   // slow enough to watch
     layer(1, () => {
       cut(Pr(60, 500, 960, 520, 30), '#F7FAFD', 2, { edge: .3 }); cut(Pr(60, 1060, 960, 520, 30), '#F7FAFD', 2, { edge: .3 });
-      const f = fingertip(640, 820, .9, { skinBack: back, dry: back });
-      rulerSpan(f.nailStart, f.nailEnd, 640, back > .5 ? 'เห็นเล็บมากขึ้น' : 'ส่วนที่เห็น', '#D9734E');
-      ptext('เล็บยาวเท่าเดิม', 300, 560, 34, '#2E9C8E', { lv: 0, weight: 700, alpha: pop(t, NT.n09[0] + .6, .3) });
+      // two fingers from above: as it was, and after the skin has shrunk. Same nail; the dashed outline is the part under the skin.
+      const L = fingerTop(300, 1100, .82, { back: 0, hidden: pop(t, NT.n09[0] + .3, .4) }), R = fingerTop(700, 1100, .82, { back, hidden: pop(t, NT.n09[0] + .3, .4) });
+      ptext('ปกติ', 300, 545, 36, '#3A2E2A', { lv: 0, weight: 800 }); ptext('ผิวหดตัว', 700, 545, 36, '#B5483A', { lv: 0, weight: 800 });
+      rulerV(180, L.top, L.cut, 'ที่เห็น', '#2E9C8E'); rulerV(840, R.top, R.cut, 'เห็นมากขึ้น', '#D9734E');
+      ptext('เส้นประ = เล็บส่วนที่อยู่ใต้ผิว · ยาวเท่ากัน', 540, 1000, 30, '#B5483A', { lv: 0, weight: 700, alpha: pop(t, NT.n09[0] + .6, .3) });
       chin(540, 1340, 1.2, drop, drop);
       ptext('ตอหนวดยาวเท่าเดิม แต่ผิวลดระดับลง', 540, 1120, 34, '#2E9C8E', { lv: 0, weight: 700, alpha: pop(t, stub + .3, .3) });
     });
