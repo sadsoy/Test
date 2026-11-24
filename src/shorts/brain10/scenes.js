@@ -163,7 +163,8 @@
       for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) { const d = Math.hypot(P[i][0] - P[j][0], P[i][1] - P[j][1]); if (d < 190) strip([P[i], P[j]], mixCol('#3E3870', '#FF8A7A', surge), 3, 0, { alpha: .7 }); }
       P.forEach(([x, y], i) => { const sparse = Math.max(0, Math.sin(t * (2 + hash(i) * 3) + i * 7)) ** 12;   // a few at a time
         neuron(x, y, 16, clamp(sparse + surge), i); });
-      if (surge > .2) { PX.save(); PX.globalAlpha = .25 * surge * (.5 + .5 * Math.sin(t * 40)); PX.fillStyle = '#FFFFFF'; PX.fillRect(0, 0, W, H); PX.restore(); }
+      // a steady red wash, never a strobe: flashing at 3-60 Hz can trigger photosensitive seizures (broadcast limit: 3 flashes/s)
+      if (surge > 0) { PX.save(); PX.globalAlpha = .18 * surge; PX.fillStyle = '#FF5A4A'; PX.fillRect(0, 0, W, H); PX.restore(); }
       eeg(100, 980, 1470, t, surge);
     });
     layer(0, () => {

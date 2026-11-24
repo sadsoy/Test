@@ -93,3 +93,9 @@ code, Ghibli-inspired, built with ClaudeAnimationBase (copied from P Doom).
   Rebuild: `SHORT=sweat python3 -I scripts/shorts_voice.py shorts/sweat/take1.wav =4.25,=6.90,=11.15,=14.85,=17.41,=21.39,=26.89,=30.76,=35.04,=38.92`
   → `python3 -I scripts/shorts_checkcuts.py out/shorts/sweat/audio/lines` → `SHORT=sweat node scripts/shorts_audio.mjs` → render.
 - Lesson: never trust the take's transcript timestamps for cuts (off by ~1.5 s here); always run shorts_checkcuts.py.
+
+## Short: เราใช้สมองแค่ 10% จริงหรือ? (2026-11-24)
+- Done: 39.83 s → `out/shorts/brain10/brain10_shorts.mp4` (+ `_720p`). Docs `shorts/brain10/`, code `src/shorts/brain10/`.
+  Rebuild: `SHORT=brain10 python3 -I scripts/shorts_voice.py shorts/brain10/take1.wav =3.75,=8.54,=12.85,=16.24,=20.30,=23.74,=27.63,=31.70,=35.15,=39.46`
+  → `shorts_checkcuts.py` → `SHORT=brain10 node scripts/shorts_audio.mjs` → render `--page=shorts_brain10.html`.
+- Rule learned: no strobes. Full-frame flashing must stay ≤ 3 per second (photosensitive epilepsy); QC now counts them.
