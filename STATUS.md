@@ -79,3 +79,11 @@ code, Ghibli-inspired, built with ClaudeAnimationBase (copied from P Doom).
 - Open: a human listen for levels and music 
 - The placed narration of v3.1 is kept in the repo as `shorts/clean-energy/narration.flac` (out/ is not committed and the TTS
   take was lost once): `ffmpeg -i shorts/clean-energy/narration.flac out/shorts/audio/narration.wav` restores it for the mix.
+
+## Short: ทำไมเราถึงรู้สึกง่วงหลังจากกินอาหาร? (2026-11-24)
+- Done: 39.9 s, 1080×1920, 30 fps → `out/shorts/sleepy/sleepy_shorts.mp4` (+ `_720p`). Docs in `shorts/sleepy/`. Page
+  `shorts_sleepy.html`; code in `src/shorts/sleepy/`. Rebuild: `SHORT=sleepy python3 -I scripts/shorts_voice.py
+  shorts/sleepy/take1.wav =2.80,=6.01,=10.30,=13.68,=17.20,=22.30,=25.29,=29.63,=33.37,=38.27` → `SHORT=sleepy node
+  scripts/shorts_audio.mjs` → `render.mjs --page=shorts_sleepy.html --fps=30 --frames --workers=4 --framesdir=out/shorts/sleepy/frames`.
+- Lesson: in a shot fn, `dur` is the shot's LENGTH; a keyframe at the shot's end is `t - lt + dur`. Fixed in sleepy; the
+  clean-energy scenes still use `[dur, …]` in several camera keys (camera holds early / small snap) — not fixed, not asked.

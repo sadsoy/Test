@@ -13,7 +13,7 @@
   function s1(t, lt, dur) {
     const sleepy = ph('n01', 1), why = ph('n01', 2), whyQ = ph('n01', 3);
     pcBegin('#F6C9A0'); sky('#FAD9B5', '#F6C9A0', '#EBA978'); confetti(t, ['#F9E0C2', '#F2B38A', '#FFE9D2'], 10);
-    const z = kf(t, [[0, 1.18], [sleepy, 1.08], [why, 1.0], [dur, .97]], easeOut), sh = t > sleepy && t < sleepy + .35 ? shakeXY(t, 6 * (1 - seg(t, sleepy, sleepy + .35))) : [0, 0];
+    const z = kf(t, [[0, 1.18], [sleepy, 1.08], [why, 1.0], [dur, .97]], easeOut)   /* shot 1 starts at 0, so dur is its end */, sh = t > sleepy && t < sleepy + .35 ? shakeXY(t, 6 * (1 - seg(t, sleepy, sleepy + .35))) : [0, 0];
     pcCam(540 + sh[0], 1000 + sh[1], z);
     const eaten = ease(seg(t, .05, sleepy - .05)), lid = kf(t, [[sleepy - .05, 0], [sleepy + .2, .92], [why - .1, .8], [why + .25, .3], [dur, .45]]);
     const nod = kf(t, [[sleepy, 0], [sleepy + .25, .22], [why, .16], [why + .3, -.06], [dur, .02]], easeOut), bob = kf(t, [[sleepy, 0], [sleepy + .25, 40], [why + .3, 0]], easeOut);
@@ -36,7 +36,8 @@
   function s2(t, lt, dur) {
     const T0 = NT.n02[0], truth = NT.n03[0], steady = ph('n03', 1);
     pcBegin('#7CC6C0'); sky('#9AD8D2', '#7CC6C0', '#5AAFAA');
-    pcCam(540, kf(t, [[T0 - .2, 1000], [truth, 960], [dur, 940]]), kf(t, [[T0 - .2, 1.08], [truth, 1.0], [dur, .98]]));
+    const end = t - lt + dur;
+    pcCam(540, kf(t, [[T0 - .2, 1000], [truth, 960], [end, 940]]), kf(t, [[T0 - .2, 1.08], [truth, 1.0], [end, .98]]));
     const myth = seg(t, ph('n02', 1), ph('n02', 2) + .4) * (1 - seg(t, steady, steady + .6)), grey = myth;
     layer(.3, () => { for (let i = 0; i < 5; i++) cut(Pc(140 + i * 210, 1700 + (i % 2) * 60, 130), '#6BB8B2', 1, { sa: .2 }); });
     layer(1, () => {
@@ -122,7 +123,8 @@
   function s4(t, lt, dur) {
     const T0 = NT.n06[0], press = ph('n06', 1), name = ph('n06', 3);
     pcBegin('#2B2650'); sky('#221E44', '#2B2650', '#3A3468');
-    pcCam(540, kf(t, [[T0 - .2, 1020], [name, 980], [dur, 960]]), kf(t, [[T0 - .2, 1.12], [name, 1.0], [dur, .97]]));
+    const end = t - lt + dur;
+    pcCam(540, kf(t, [[T0 - .2, 1020], [name, 980], [end, 960]]), kf(t, [[T0 - .2, 1.12], [name, 1.0], [end, .97]]));
     layer(.3, () => brain(540, 960, 4.2, '#3E3770', { lv: 1, alpha: .8 }));
     const cells = [[330, 800], [540, 720], [750, 800], [270, 1010], [480, 980], [690, 1000], [820, 1150], [410, 1190], [610, 1210]];
     const dim = i => (i % 3 === 1 ? .15 : 1) * seg(t, press + .1 + i * .1, press + .6 + i * .1);   // some cells dim, not all: "อาจ"
@@ -173,7 +175,8 @@
     const gold = seg(t, T0, still);
     pcBegin('#F4B860'); sky(mixCol('#BFE6F2', '#F7C978', gold), mixCol('#9ED3E6', '#F4B860', gold), mixCol('#7FC3DC', '#E89A48', gold));
     const graph = ease(seg(t, clock - .2, clock + .5));
-    pcCam(540, lerp(960, 1000, graph), lerp(1.06, 1.0, graph));
+    const settle = ease(seg(t, dip, t - lt + dur));   // (dur is the shot's length: its end is t - lt + dur)                     // keep the camera alive once the curve is drawn
+    pcCam(lerp(540, 600, settle), lerp(960, 1000, graph) - 30 * settle, lerp(1.06, 1.0, graph) + .1 * settle);
     if (graph < 1) layer(1, () => {
       PX.save(); PX.globalAlpha = 1 - graph;
       const h = kf(t, [[T0, 8], [still, 14.2]], ease);
@@ -186,13 +189,13 @@
       PX.save(); PX.globalAlpha = graph;
       cut(Pr(80, 560, 920, 900, 30), '#FBF5E8', 3, { edge: .3 });
       const X = hh => lerp(160, 920, (hh - 7) / 16), Y = v => lerp(1300, 700, v), alert = hh => clamp(.55 + .3 * Math.sin((hh - 9) / 14 * Math.PI) - .28 * Math.exp(-Math.pow((hh - 14.5) / 1.5, 2)) - (hh > 21 ? (hh - 21) * .18 : 0));
-      cut(Pr(X(13), 640, X(16) - X(13), 680, 10), 'rgba(123,102,201,.22)', 0, { tex: .3 });
+      cut(Pr(X(13), 640, X(16) - X(13), 680, 10), `rgba(123,102,201,${.2 + .08 * Math.sin(t * 3)})`, 0, { tex: .3 });
       const draw = ease(seg(t, clock, dip + .6)), P = []; for (let hh = 7; hh <= 7 + 16 * draw; hh += .25) P.push([X(hh), Y(alert(hh))]);
       if (P.length > 1) strip(P, '#E0614A', 12, 2);
       for (const [hh, lab] of [[8, '8 น.'], [12, '12 น.'], [16, '16 น.'], [20, '20 น.']]) ptext(lab, X(hh), 1360, 30, '#5A4A44', { lv: 0 });
       ptext('ความตื่นตัว', 260, 610, 34, '#5A4A44', { lv: 0, weight: 600 });
       const kd = pop(t, dip, .4);
-      if (kd > 0) { ptext('ช่วงบ่าย', X(14.5), 760, 46, '#5B4A8A', { pop: kd, lv: 1, weight: 700 }); person(X(14.5), Y(alert(14.5)) - 10 + 160 * .32, .32, { lid: .75, legs: false, nod: .15, smile: .2 }); zzz(X(14.5) + 40, Y(alert(14.5)) - 140, t, kd, .7); }
+      if (kd > 0) { ptext('ช่วงบ่าย', X(14.5), 760, 46, '#5B4A8A', { pop: kd, lv: 1, weight: 700 }); person(X(14.5), Y(alert(14.5)) - 10 + 160 * .32 + 3 * Math.sin(t * 3), .32, { lid: .7 + .2 * (.5 + .5 * Math.sin(t * 1.7)), legs: false, nod: .12 + .08 * Math.sin(t * 1.7), smile: .2 }); zzz(X(14.5) + 40, Y(alert(14.5)) - 140, t, kd, .7); }
       PX.restore();
     });
     layer(0, () => {
