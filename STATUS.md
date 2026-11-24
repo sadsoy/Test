@@ -69,9 +69,13 @@ code, Ghibli-inspired, built with ClaudeAnimationBase (copied from P Doom).
   bank (Apple licence); SFX are synthesized in code.
 
 ## Short: ถ้าโลกเปลี่ยนไปใช้พลังงานสะอาดทั้งหมด? (2026-11-23)
-- Done v3 (v1 39.9 s at 1.25× felt rushed; v2 55.9 s at 1.0× felt slow and repeated a phrase at 9 s): 44.9 s at 1.1×, new n03 wording, 1080×1920, 30 fps, paper-cut style → `out/shorts/clean-energy_shorts.mp4` (+ `_720p`). Docs in
+- Done v3.1 (44.4 s; v3's stutter at 16 s fixed) — v3 (v1 39.9 s at 1.25× felt rushed; v2 55.9 s at 1.0× felt slow and repeated a phrase at 9 s): 44.9 s at 1.1×, new n03 wording, 1080×1920, 30 fps, paper-cut style → `out/shorts/clean-energy_shorts.mp4` (+ `_720p`). Docs in
   `shorts/clean-energy/` (SCRIPT, STORYBOARD, ASSETS, QC). Page `shorts.html` (`render.mjs --page=shorts.html --fps=30`).
 - Rebuild: TTS take (`scripts/shorts_tts.py shorts/clean-energy/full4.json out/shorts/voice/take Puck gemini-2.5-flash-preview-tts`)
-  → `scripts/shorts_voice.py out/shorts/voice/take/full4.wav 4.56,8.37,14.71,=17.86,23.53,27.92,31.35,36.62,41.26` (then transcribe narration.wav to check) → re-check `src/shorts/phrases.js` → `node scripts/shorts_audio.mjs` →
+  → `scripts/shorts_voice.py out/shorts/voice/take/full4.wav 4.56,8.37,14.71,=18.13,23.53,27.92,31.35,36.62,41.26` (then transcribe
+  narration.wav to check). v3.1: "=17.86" had cut n04's last word ปี in half (heard as a stutter at 16 s); the fix was made by
+  hand on the line files (`--lines` re-places them) because full4.wav was lost with the container; 18.13 is the equivalent take cut. → re-check `src/shorts/phrases.js` → `node scripts/shorts_audio.mjs` →
   `render.mjs --page=shorts.html --fps=30 --frames --workers=4 --framesdir=out/shorts/frames` → ffmpeg mux with mix.wav.
 - Open: a human listen for levels and music 
+- The placed narration of v3.1 is kept in the repo as `shorts/clean-energy/narration.flac` (out/ is not committed and the TTS
+  take was lost once): `ffmpeg -i shorts/clean-energy/narration.flac out/shorts/audio/narration.wav` restores it for the mix.
