@@ -16,6 +16,17 @@ GAP = {"n02": .32, "n03": .28, "n04": .7, "n05": .35, "n06": .7, "n07": .35, "n0
 # a line re-recorded on its own can replace the take's span: {"n02": "out/shorts/voice/take/n02b.wav"}
 OVERRIDE = {}
 OUT_WAV, OUT_JS = "out/shorts/audio/narration.wav", "src/shorts/narration.js"
+LINE_DIR = "out/shorts/audio/lines"
+# SHORT=<slug> builds another Short: its lines in shorts/<slug>/lines.json, its settings in shorts/<slug>/voice.json
+# ({"tempo", "lead", "tail", "gap": {...}}), its files under out/shorts/<slug>/audio and src/shorts/<slug>/narration.js.
+# Without SHORT everything above is the clean-energy Short, unchanged.
+import os
+SHORT = os.environ.get("SHORT")
+if SHORT:
+    LINES = json.load(open(f"shorts/{SHORT}/lines.json"))
+    V = json.load(open(f"shorts/{SHORT}/voice.json"))
+    TEMPO, LEAD, TAIL, GAP, OVERRIDE = V["tempo"], V["lead"], V["tail"], V["gap"], V.get("override", {})
+    OUT_WAV, OUT_JS, LINE_DIR = f"out/shorts/{SHORT}/audio/narration.wav", f"src/shorts/{SHORT}/narration.js", f"out/shorts/{SHORT}/audio/lines"
 
 def pcm(path, sr=24000):
     p = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", path, "-ac", "1", "-ar", str(sr), "-f", "s16le", "-"], capture_output=True)
@@ -36,11 +47,11 @@ for c in CUTS:
     assert near, f"no pause near {c}: give a better cut time"
     cuts.append(max(near, key=lambda p: p[1] - abs(p[0] - c))[0])      # the longer pause, the nearer one first
 bounds = [0] + cuts + [len(x) / sr] if not LINES_ONLY else [0] * (len(LINES) + 1)
-import os; os.makedirs("out/shorts/audio/lines", exist_ok=True)
+os.makedirs(LINE_DIR, exist_ok=True)
 keys = list(LINES); assert len(keys) == len(bounds) - 1, (len(keys), len(bounds))
 segs, t, out = [], LEAD, []
 for i, k in enumerate(keys):
-    f = f"out/shorts/audio/lines/{k}.wav"
+    f = f"{LINE_DIR}/{k}.wav"
     af = ("silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.02,areverse,"
           "silenceremove=start_periods=1:start_threshold=-42dB:start_silence=0.06,areverse,"
           f"atempo={TEMPO},afade=t=in:d=0.01")

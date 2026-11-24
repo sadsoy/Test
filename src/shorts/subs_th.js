@@ -37,7 +37,8 @@ function drawOverlay(c, t) {
   if (window.CLEAN) return;
   const L = NARR.findIndex(([a, b], i) => t >= a - .12 && t < Math.min(b + .35, i + 1 < NARR.length ? NARR[i + 1][0] - .12 : 1e9));
   if (L < 0) return;
-  const [a, b, key] = NARR[L], P = PHR[key], size = SUBT.size, gap = size * .32;
+  const [a, b, key] = NARR[L], P = PHR[key], widest = Math.max(...P.map(p => subWidth(p.txt, SUBT.size)));
+  const size = widest > SUBT.maxW ? SUBT.size * SUBT.maxW / widest : SUBT.size, gap = size * .32;   // one phrase too wide for a row: shrink the line
   // rows: fill greedily by phrase
   const rows = [[]]; let w = 0;
   P.forEach((p, i) => { const pw = subWidth(p.txt, size); if (rows[rows.length - 1].length && w + gap + pw > SUBT.maxW) { rows.push([]); w = 0; } rows[rows.length - 1].push(i); w += (w ? gap : 0) + pw; });

@@ -3,18 +3,22 @@
 // beats as the picture: they read the narration timing (src/shorts/narration.js) and the phrase onsets (subs_th.js),
 // exactly as the scenes do. Writes out/shorts/audio/{music,sfx}.wav and the final mix.wav (-14 LUFS, -3 dBTP so the AAC encode stays under 0 dBFS).
 // The score is synthesized here because scripts/render_music.swift needs macOS; scripts/sfx.mjs is the model for the SFX.
-// Usage: node scripts/shorts_audio.mjs
+// Usage: node scripts/shorts_audio.mjs           (the clean-energy Short)
+//        SHORT=<slug> node scripts/shorts_audio.mjs   another Short: src/shorts/<slug>/{narration,phrases}.js and its
+//        src/shorts/<slug>/sound.mjs (default export ({ NT, ph, DUR }) => { BPM, SEC, CH, CUT, cues(tools) }) → out/shorts/<slug>/audio
 import fs from 'fs';
 import vm from 'vm';
 import { spawnSync } from 'child_process';
 
+const SHORT = process.env.SHORT, SRCD = SHORT ? `src/shorts/${SHORT}/` : 'src/shorts/', OUTD = SHORT ? `out/shorts/${SHORT}/audio` : 'out/shorts/audio';
 const ctx = vm.createContext({ console });
-vm.runInContext(fs.readFileSync('src/shorts/narration.js', 'utf8') + '\n' + fs.readFileSync('src/shorts/phrases.js', 'utf8') + '\n' + fs.readFileSync('src/shorts/subs_th.js', 'utf8')
+vm.runInContext(fs.readFileSync(SRCD + 'narration.js', 'utf8') + '\n' + fs.readFileSync(SRCD + 'phrases.js', 'utf8') + '\n' + fs.readFileSync('src/shorts/subs_th.js', 'utf8')
   + '\nconst W = 1080, clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));', ctx);
 const NT = vm.runInContext('NT', ctx), ph = (k, i = 0) => vm.runInContext(`ph(${JSON.stringify(k)}, ${i})`, ctx);
 const DUR = vm.runInContext('NARR_DUR', ctx), SR = 48000, N = Math.ceil(DUR * SR), TAU = Math.PI * 2;
+const S = SHORT ? (await import(`../src/shorts/${SHORT}/sound.mjs`)).default({ NT, ph, DUR }) : null;
 // the cuts, as in clean_energy.js
-const CUT = { c2: NT.n02[0] - .12, c3: NT.n04[0] - .2, c4: NT.n06[0] - .19, c5: NT.n07[0] - .1, c6: NT.n08[0] - .1, c7: NT.n09[0] - .19, c8: NT.n10[0] - .13 };
+const CUT = S ? S.CUT : { c2: NT.n02[0] - .12, c3: NT.n04[0] - .2, c4: NT.n06[0] - .19, c5: NT.n07[0] - .1, c6: NT.n08[0] - .1, c7: NT.n09[0] - .19, c8: NT.n10[0] - .13 };
 
 // ---------- tools ----------
 const L = new Float32Array(N), R = new Float32Array(N), FL = new Float32Array(N), FR = new Float32Array(N);
@@ -26,10 +30,10 @@ const add = (A, B, i, l, r) => { if (i >= 0 && i < N) { A[i] += l; B[i] += r; } 
 const pan = p => [Math.cos((p + 1) * Math.PI / 4), Math.sin((p + 1) * Math.PI / 4)];
 
 // ---------- score ----------
-const BPM = 100, BEAT = 60 / BPM, BAR = 4 * BEAT;
-const SEC = { a: [0, CUT.c3], b: [CUT.c3, CUT.c4], c: [CUT.c4, CUT.c7], d: [CUT.c7, DUR] };
+const BPM = S?.BPM ?? 100, BEAT = 60 / BPM, BAR = 4 * BEAT;
+const SEC = S ? S.SEC : { a: [0, CUT.c3], b: [CUT.c3, CUT.c4], c: [CUT.c4, CUT.c7], d: [CUT.c7, DUR] };
 // chords per section (MIDI roots and voicings), changing every bar from the section start
-const CH = {
+const CH = S ? S.CH : {
   a: [[38, 50, 53, 57], [38, 50, 53, 58], [36, 48, 52, 55], [38, 50, 53, 57], [34, 46, 50, 53]],          // Dm Dm(b6) C Dm Bb
   b: [[38, 50, 54, 57], [33, 45, 52, 57], [35, 47, 50, 54], [31, 43, 50, 55]],                            // D A Bm G
   c: [[35, 47, 50, 54], [31, 43, 47, 50], [35, 47, 50, 54], [33, 45, 49, 52], [35, 47, 50, 54]],          // Bm G Bm A Bm
@@ -145,14 +149,15 @@ function writeWav(file, A, B) {
   for (let i = 0; i < N; i++) { buf.writeFloatLE(A[i], 44 + i * 8); buf.writeFloatLE(B[i], 48 + i * 8); }
   fs.writeFileSync(file, buf);
 }
-pad(); rhythm(); melody(); sfx();
-fs.mkdirSync('out/shorts/audio', { recursive: true });
-writeWav('out/shorts/audio/music.wav', L, R); writeWav('out/shorts/audio/sfx.wav', FL, FR);
+pad(); rhythm(); melody();
+if (S) S.cues({ noiseBurst, thump, paperTap, chime, zap, snip, stamp, hum, pluck, piano }); else sfx();
+fs.mkdirSync(OUTD, { recursive: true });
+writeWav(`${OUTD}/music.wav`, L, R); writeWav(`${OUTD}/sfx.wav`, FL, FR);
 
 // ---------- mix: narration on top, the music ducks under it, then two-pass loudnorm to -14 LUFS / -1.5 dBTP ----------
 const ff = a => { const p = spawnSync('ffmpeg', ['-hide_banner', '-nostats', ...a], { encoding: 'utf8', maxBuffer: 1 << 26 }); if (p.status) throw new Error(p.stderr.slice(-800)); return p.stderr; };
 const lufs = f => +[...ff(['-i', f, '-af', 'ebur128', '-f', 'null', '-']).matchAll(/I:\s+(-?[\d.]+) LUFS/g)].pop()[1];
-const SRC = { voice: 'out/shorts/audio/narration.wav', music: 'out/shorts/audio/music.wav', sfx: 'out/shorts/audio/sfx.wav' };
+const SRC = { voice: `${OUTD}/narration.wav`, music: `${OUTD}/music.wav`, sfx: `${OUTD}/sfx.wav` };
 const LEVEL = { voice: -16, music: -27, sfx: -25 };
 const gain = Object.fromEntries(Object.entries(SRC).map(([k, f]) => [k, +(LEVEL[k] - lufs(f)).toFixed(2)]));
 console.log('gains dB', JSON.stringify(gain));
@@ -163,5 +168,5 @@ const graph = last => [`${v(0, 'voice')},highpass=f=70,acompressor=threshold=0.1
 const inputs = Object.values(SRC).flatMap(f => ['-i', f]), base = 'loudnorm=I=-14:TP=-3:LRA=11';   // -3 dBTP: AAC overshoots ~2.5 dB
 const m = JSON.parse(/\{[^{}]*"input_i"[^{}]*\}/.exec(ff([...inputs, '-filter_complex', graph(`${base}:print_format=json`), '-map', '[out]', '-f', 'null', '-']))[0]);
 ff(['-y', ...inputs, '-filter_complex', graph(`${base}:linear=true:measured_I=${m.input_i}:measured_TP=${m.input_tp}:measured_LRA=${m.input_lra}:measured_thresh=${m.input_thresh}:offset=${m.target_offset},aresample=48000`),
-  '-map', '[out]', '-c:a', 'pcm_s24le', 'out/shorts/audio/mix.wav']);
-console.log(`out/shorts/audio/mix.wav: ${lufs('out/shorts/audio/mix.wav')} LUFS`, 'cuts', JSON.stringify(Object.fromEntries(Object.entries(CUT).map(([k, x]) => [k, +x.toFixed(2)]))));
+  '-map', '[out]', '-c:a', 'pcm_s24le', `${OUTD}/mix.wav`]);
+console.log(`${OUTD}/mix.wav: ${lufs(`${OUTD}/mix.wav`)} LUFS`, 'cuts', JSON.stringify(Object.fromEntries(Object.entries(CUT).map(([k, x]) => [k, +x.toFixed(2)]))));
