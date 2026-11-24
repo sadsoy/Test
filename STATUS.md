@@ -87,3 +87,9 @@ code, Ghibli-inspired, built with ClaudeAnimationBase (copied from P Doom).
   scripts/shorts_audio.mjs` → `render.mjs --page=shorts_sleepy.html --fps=30 --frames --workers=4 --framesdir=out/shorts/sleepy/frames`.
 - Lesson: in a shot fn, `dur` is the shot's LENGTH; a keyframe at the shot's end is `t - lt + dur`. Fixed in sleepy; the
   clean-energy scenes still use `[dur, …]` in several camera keys (camera holds early / small snap) — not fixed, not asked.
+
+## Short: เหงื่อออกมากแปลว่าเผาผลาญไขมันมากจริงหรือ? (2026-11-24)
+- Done: 39.4 s → `out/shorts/sweat/sweat_shorts.mp4` (+ `_720p`). Docs `shorts/sweat/`, code `src/shorts/sweat/`, page `shorts_sweat.html`.
+  Rebuild: `SHORT=sweat python3 -I scripts/shorts_voice.py shorts/sweat/take1.wav =4.25,=6.90,=11.15,=14.85,=17.41,=21.39,=26.89,=30.76,=35.04,=38.92`
+  → `python3 -I scripts/shorts_checkcuts.py out/shorts/sweat/audio/lines` → `SHORT=sweat node scripts/shorts_audio.mjs` → render.
+- Lesson: never trust the take's transcript timestamps for cuts (off by ~1.5 s here); always run shorts_checkcuts.py.
