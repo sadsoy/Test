@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<defs>
+  <filter id="pc" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="5"/><feOffset dx="2.1" dy="7" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.38"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter>
+  <filter id="pcs" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dx="1.2" dy="4" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.32"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter></defs>
+<rect width="512" height="512" fill="#F4ECDD"/>
+<g filter="url(#pc)" transform="rotate(-6 256 256)"><path fill="#E8604C" fill-rule="evenodd" d="M110,110 L402,110 L452,170 L452,402 L60,402 L60,170 Z M256,131 L264.41,156.59 L290,165 L264.41,173.41 L256,199 L247.59,173.41 L222,165 L247.59,156.59 Z M119.58 217.50L163.68 217.50L163.68 330L129.18 330L129.18 232.95L139.07 232.95L82.67 295.20L82.53 284.55L180.63 284.55L180.63 309.90L57.63 309.90L57.63 285.45 M256.07 332.55Q236.57 332.55 222.10 325.20Q207.63 317.85 199.68 304.65Q191.72 291.45 191.72 273.75Q191.72 256.05 199.68 242.85Q207.63 229.65 222.10 222.30Q236.57 214.95 256.07 214.95Q275.43 214.95 289.90 222.30Q304.38 229.65 312.40 242.85Q320.42 256.05 320.42 273.75Q320.42 291.45 312.40 304.65Q304.38 317.85 289.90 325.20Q275.43 332.55 256.07 332.55M256.07 304.35Q270.18 304.35 277.90 296.32Q285.63 288.30 285.63 273.75Q285.63 259.05 277.90 251.10Q270.18 243.15 256.07 243.15Q242.13 243.15 234.25 251.10Q226.38 259.05 226.38 273.75Q226.38 288.30 234.25 296.32Q242.13 304.35 256.07 304.35 M391.82 217.50L435.93 217.50L435.93 330L401.43 330L401.43 232.95L411.32 232.95L354.93 295.20L354.77 284.55L452.88 284.55L452.88 309.90L329.88 309.90L329.88 285.45"/></g>
+</svg>

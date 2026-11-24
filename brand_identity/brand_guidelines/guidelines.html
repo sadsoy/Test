@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>NOVA 404 Brand Guidelines</title>
+<!-- Source of nova404_brand_guidelines.pdf (render: node brand_identity/src/render.mjs pdf …). 16:9 pages of 1600 × 900 px.
+     ?only=<id> shows one page (used to export the palette and typography sheets as PNG). -->
+<style>
+  @font-face { font-family: "Unbounded"; font-weight: 800; src: url(../typography/fonts/unbounded-800.ttf); }
+  @font-face { font-family: "Unbounded"; font-weight: 600; src: url(../typography/fonts/unbounded-600.ttf); }
+  @font-face { font-family: "Kanit"; font-weight: 400; src: url(../typography/fonts/kanit-400.ttf); }
+  @font-face { font-family: "Kanit"; font-weight: 600; src: url(../typography/fonts/kanit-600.ttf); }
+  @font-face { font-family: "Kanit"; font-weight: 800; src: url(../typography/fonts/kanit-800.ttf); }
+  @font-face { font-family: "Space Mono"; font-weight: 400; src: url(../typography/fonts/spacemono-400.ttf); }
+  @font-face { font-family: "Space Mono"; font-weight: 700; src: url(../typography/fonts/spacemono-700.ttf); }
+  :root { --ink:#1B1F3B; --indigo:#2E3A6E; --dusk:#46559A; --void:#0E1226; --cream:#F4ECDD; --paper:#EDE3D1; --gold:#FFC83D; --goldlt:#FFE08A; --coral:#E8604C; --mist:#C9CFE6; }
+  @page { size: 1600px 900px; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #555; }
+  body { font: 400 21px/1.5 "Kanit", sans-serif; color: var(--ink); }
+  .pg { width: 1600px; height: 900px; position: relative; overflow: hidden; background: var(--cream); padding: 70px 90px; page-break-after: always; break-after: page; }
+  .pg.dark { background: var(--ink); color: var(--cream); }
+  .pg::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: url(img/grain.png); }
+  .num { position: absolute; right: 90px; bottom: 40px; font: 700 15px "Space Mono"; opacity: .55; letter-spacing: .1em; }
+  .kick { font: 700 16px "Space Mono"; letter-spacing: .18em; text-transform: uppercase; color: var(--coral); margin: 0 0 6px; }
+  h1 { font: 800 54px/1.15 "Kanit"; margin: 0 0 26px; }
+  h2 { font: 600 27px/1.3 "Kanit"; margin: 0 0 10px; }
+  h3 { font: 700 15px "Space Mono"; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 8px; opacity: .7; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0; padding-left: 22px; } li { margin: 0 0 6px; }
+  .cols { display: grid; gap: 40px; } .c2 { grid-template-columns: 1fr 1fr; } .c3 { grid-template-columns: repeat(3, 1fr); } .c4 { grid-template-columns: repeat(4, 1fr); }
+  .card { background: #FBF6EC; border-radius: 14px; padding: 22px 26px; box-shadow: 3px 8px 18px rgba(38,24,14,.16); }
+  .dark .card { background: var(--indigo); box-shadow: 3px 8px 18px rgba(0,0,0,.35); }
+  .mono { font-family: "Space Mono"; font-size: 17px; }
+  .small { font-size: 17px; } .muted { opacity: .7; }
+  img { display: block; max-width: 100%; }
+  .do { color: #23867A; font-weight: 600; } .dont { color: var(--coral); font-weight: 600; }
+  table { border-collapse: collapse; width: 100%; font-size: 18px; } td, th { text-align: left; padding: 7px 10px; border-bottom: 1px solid rgba(27,31,59,.15); vertical-align: top; }
+  .dark td, .dark th { border-color: rgba(244,236,221,.18); }
+  th { font: 700 14px "Space Mono"; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
+  .sw { border-radius: 12px; height: 120px; padding: 12px 14px; display: flex; flex-direction: column; justify-content: flex-end; box-shadow: 3px 8px 16px rgba(38,24,14,.18); font: 700 15px "Space Mono"; }
+  .sw b { font: 600 19px "Kanit"; }
+  .tag { display: inline-block; padding: 2px 12px; border-radius: 8px; font: 700 14px "Space Mono"; margin-right: 6px; }
+  .on { opacity: 1 !important; }
+  body.one .pg { display: none; } body.one .pg.show { display: block; }
+</style>
+</head>
+<body>
+
+<!-- 1 cover -->
+<section class="pg dark" id="cover">
+  <img src="img/cover_bg.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55">
+  <div style="position:relative;margin-top:240px;background:rgba(14,18,38,.55);display:inline-block;padding:40px 50px;border-radius:20px">
+    <img src="../logo/png/nova404_logo_main_dark.png" style="width:760px">
+    <p style="font:600 40px Kanit;margin:30px 0 0">Brand Guidelines &amp; Visual Identity</p>
+    <p class="mono" style="color:var(--goldlt)">VERSION 1.0 · 2026 · ภาษาไทย / ENGLISH</p>
+  </div>
+  <div class="num">01</div>
+</section>
+
+<!-- 2 brand core -->
+<section class="pg" id="core">
+  <p class="kick">Brand core</p><h1>ความรู้ที่หาไม่เจอ… เราหามาให้</h1>
+  <div class="cols c3">
+    <div class="card"><h3>ชื่อ</h3><h2>NOVA + 404</h2><p><b>NOVA</b> คือดาวที่สว่างวาบขึ้นมา เหมือนช่วงเวลาที่เราร้อง "อ๋อ!"</p><p><b>404</b> คือ "Not Found" หมายถึงความรู้ที่ยังหาไม่เจอ และความเชื่อที่ไม่มีหลักฐานรองรับ</p><p>ช่องนี้จึงพาไปหาเรื่องที่หาไม่เจอ แล้วทำให้มันสว่างขึ้น</p></div>
+    <div class="card"><h3>บุคลิก</h3><h2>อยากรู้ ลึกลับนิด ๆ เป็นมิตร</h2>
+      <ul class="small"><li><b>ทันสมัย</b>: กระชับ ฉับไว เข้าใจวัฒนธรรม Shorts</li><li><b>ขี้สงสัย</b>: เปิดด้วยคำถามเสมอ</li><li><b>ลึกลับเล็กน้อย</b>: โทนกลางคืน มีแสงดาวนำทาง</li><li><b>เป็นมิตร</b>: พูดกับผู้ชมเหมือนเพื่อนที่รู้เยอะ</li><li><b>มืออาชีพ</b>: มีแหล่งข้อมูลทุกตัวเลข</li></ul></div>
+    <div class="card"><h3>น้ำเสียง</h3>
+      <table class="small"><tr><th>ใช่</th><th>ไม่ใช่</th></tr>
+      <tr><td class="do">"เคยสงสัยไหม…"</td><td class="dont">"วันนี้เราจะมาพูดถึง…"</td></tr>
+      <tr><td class="do">"นักวิจัยพบว่า…"</td><td class="dont">"รู้หรือไม่! ช็อก!"</td></tr>
+      <tr><td class="do">"ยังไม่มีใครรู้แน่ชัด"</td><td class="dont">เดาแล้วพูดเหมือนเป็นข้อเท็จจริง</td></tr>
+      <tr><td class="do">ภาษาพูดที่สุภาพ</td><td class="dont">ภาษาข่าวหรือภาษาเด็ก</td></tr></table></div>
+  </div>
+  <div class="card" style="margin-top:34px"><h3>ผู้ชมและหัวข้อ</h3><p>ผู้ชมอายุ 15–35 ปีที่ดู Shorts ระหว่างวันและอยากได้ความรู้ที่เล่าต่อได้ หัวข้อหลักคือ วิทยาศาสตร์ · ธรรมชาติ · จักรวาล · ร่างกายมนุษย์ · ความเชื่อผิด ๆ · What If</p></div>
+  <div class="num">02</div>
+</section>
+
+<!-- 3 concepts -->
+<section class="pg" id="concepts">
+  <p class="kick">Logo exploration</p><h1>3 แนวคิด → เลือก A "Paper Portal"</h1>
+  <div class="cols c3">
+    <div class="card" style="outline:4px solid var(--gold)"><img src="img/A_paper_portal.jpg" style="width:200px;margin:0 auto 12px"><h2>A · Paper Portal ✓</h2>
+      <p class="small"><span class="do">ข้อดี:</span> วงกระดาษซ้อนกันจนเป็นหลุมมืด (404 = สิ่งที่ยังไม่รู้) แล้วมีดาว (NOVA) โผล่ออกมา จึงเล่าชื่อช่องได้ครบในภาพเดียว เป็นวงกลมที่เข้ากับกรอบโปรไฟล์ YouTube ใช้แทนตัว O ในคำว่า NOVA ได้ และโชว์เทคนิคกระดาษตัดได้ชัดที่สุด</p>
+      <p class="small"><span class="dont">ข้อเสีย:</span> ที่ขนาดเล็กมาก ชั้นกระดาษจะกลืนกัน จึงทำเวอร์ชัน mono ที่ลดเหลือ 2 วงไว้ใช้แทน</p></div>
+    <div class="card"><img src="img/B_folded_nova.jpg" style="width:200px;margin:0 auto 12px"><h2>B · Folded Nova</h2>
+      <p class="small"><span class="do">ข้อดี:</span> ดาวพับกระดาษเห็นชัดมากที่ขนาดเล็ก และจำง่าย</p>
+      <p class="small"><span class="dont">ข้อเสีย:</span> ดูทั่วไปเกินไป เพราะดาว 4 แฉกใช้กันมากในโลโก้ AI และ "ประกาย" ทำให้เสี่ยงดูเหมือน generic AI ซึ่ง brief ห้ามไว้ ส่วน 404 ก็กลายเป็นแค่ข้อความประกอบ</p></div>
+    <div class="card"><img src="img/C_404_tag.jpg" style="width:200px;margin:0 auto 12px"><h2>C · 404 Tag</h2>
+      <p class="small"><span class="do">ข้อดี:</span> สื่อเรื่อง "ความเชื่อผิด" ได้ทันที และสนุก</p>
+      <p class="small"><span class="dont">ข้อเสีย:</span> ป้ายตัวเลขอ่านยากที่ 48 px สีแดงทั้งก้อนให้ความรู้สึกเตือนภัยหรือ error มากกว่าความอยากรู้ และขาดความลึกลับของจักรวาล</p></div>
+  </div>
+  <p class="small" style="margin-top:24px"><b>ผลการเลือก:</b> ใช้ A เป็นสัญลักษณ์ และนำจุดเด่นของ C (ป้ายกระดาษสีคอรัล "404") มาใช้ใน wordmark ส่วนดาวพับของ B ถูกย่อลงไปเป็นดาวที่โผล่จาก portal</p>
+  <div class="num">03</div>
+</section>
+
+<!-- 4 logo system -->
+<section class="pg" id="logo">
+  <p class="kick">Logo system</p><h1>โลโก้หลักและเวอร์ชันต่าง ๆ</h1>
+  <div class="cols c2" style="gap:30px">
+    <div class="card" style="background:var(--cream)"><h3>Main · light</h3><img src="../logo/png/nova404_logo_main_light.png" style="width:560px"></div>
+    <div class="card" style="background:var(--ink)"><h3 style="color:var(--cream)">Main · dark</h3><img src="../logo/png/nova404_logo_main_dark.png" style="width:560px"></div>
+  </div>
+  <div class="cols c4" style="gap:24px;margin-top:26px">
+    <div class="card"><h3>Stacked</h3><img src="../logo/png/nova404_logo_stacked_light.png" style="height:200px;margin:auto"></div>
+    <div class="card" style="background:var(--ink)"><h3 style="color:var(--cream)">Icon · dark</h3><img src="../logo/png/nova404_icon_dark.png" style="height:200px;margin:auto"></div>
+    <div class="card" style="background:#fff"><h3>Mono black</h3><img src="../logo/png/nova404_logo_mono_black.png" style="width:100%;margin-top:60px"></div>
+    <div class="card" style="background:#000"><h3 style="color:#fff">Mono white</h3><img src="../logo/png/nova404_logo_mono_white.png" style="width:100%;margin-top:60px"></div>
+  </div>
+  <div class="num">04</div>
+</section>
+
+<!-- 5 logo rules -->
+<section class="pg" id="logorules">
+  <p class="kick">Logo rules</p><h1>พื้นที่ว่าง ขนาดเล็กสุด และข้อห้าม</h1>
+  <div class="cols c3">
+    <div class="card"><h3>Clear space</h3><p class="small">เว้นพื้นที่ว่างรอบโลโก้อย่างน้อย <b>1 × ความสูงของตัว N</b> (= x) ทุกด้าน ห้ามมีข้อความหรือภาพอื่นเข้ามาในพื้นที่นี้</p>
+      <div style="border:2px dashed var(--coral);padding:34px;border-radius:10px"><img src="../logo/png/nova404_logo_main_light.png" style="width:100%"></div></div>
+    <div class="card"><h3>Minimum size · ทดสอบจริง</h3>
+      <div style="display:flex;gap:18px;align-items:flex-end;background:var(--ink);padding:16px;border-radius:10px">
+        <img src="../logo/png/nova404_icon_dark.png" style="width:16px"><img src="../logo/png/nova404_icon_dark.png" style="width:24px"><img src="../logo/png/nova404_icon_dark.png" style="width:32px"><img src="../logo/png/nova404_icon_dark.png" style="width:48px"><img src="../logo/png/nova404_icon_dark.png" style="width:88px"></div>
+      <p class="mono" style="margin-top:6px">16 · 24 · 32 · 48 · 88 px</p>
+      <div style="display:flex;gap:18px;align-items:flex-end;padding:8px 0"><img src="../logo/png/nova404_logo_main_light.png" style="width:120px"><img src="../logo/png/nova404_logo_main_light.png" style="width:200px"></div>
+      <p class="small">Wordmark ต้องกว้างอย่างน้อย <b>120 px</b> หรือ 25 มม. ไอคอนต้องมีขนาดอย่างน้อย <b>24 px</b> ถ้าเล็กกว่า 24 px ให้ใช้เวอร์ชัน mono</p></div>
+    <div class="card"><h3>ห้ามทำ</h3><ul class="small">
+      <li class="dont">ห้ามยืด บีบ หรือเอียงโลโก้ (ยกเว้นป้าย 404 ที่เอียงอยู่แล้ว −4°)</li>
+      <li class="dont">ห้ามเปลี่ยนสีป้าย 404 เป็นสีอื่นที่ไม่ใช่คอรัล</li>
+      <li class="dont">ห้ามเปลี่ยน portal กลับเป็นตัว O ธรรมดา</li>
+      <li class="dont">ห้ามใส่เงาหรือ glow ซ้อนลงบนไฟล์โลโก้ที่มีเงากระดาษอยู่แล้ว</li>
+      <li class="dont">ห้ามวางเวอร์ชัน light บนพื้นมืด หรือเวอร์ชัน dark บนพื้นสว่าง</li>
+      <li class="dont">ห้ามวางบนภาพที่ลายเยอะโดยไม่มีแผ่นกระดาษรองหลัง</li>
+      <li class="dont">ห้ามแปลงชื่อเป็นตัวพิมพ์เล็ก เช่น "Nova404" หรือ "nova 404"</li></ul></div>
+  </div>
+  <div class="num">05</div>
+</section>
+
+<!-- 6 palette -->
+<section class="pg" id="palette">
+  <p class="kick">Colour</p><h1>Palette: ท้องฟ้ากลางคืน กระดาษครีม และแสงดาว</h1>
+  <h3>Core</h3>
+  <div class="cols" style="grid-template-columns:repeat(9,1fr);gap:14px">
+    <div class="sw" style="background:#1B1F3B;color:#F4ECDD"><b>Midnight Ink</b>#1B1F3B</div>
+    <div class="sw" style="background:#2E3A6E;color:#F4ECDD"><b>Portal Indigo</b>#2E3A6E</div>
+    <div class="sw" style="background:#46559A;color:#F4ECDD"><b>Dusk</b>#46559A</div>
+    <div class="sw" style="background:#0E1226;color:#C9CFE6"><b>Deep Void</b>#0E1226</div>
+    <div class="sw" style="background:#F4ECDD;color:#1B1F3B"><b>Paper Cream</b>#F4ECDD</div>
+    <div class="sw" style="background:#EDE3D1;color:#1B1F3B"><b>Warm Paper</b>#EDE3D1</div>
+    <div class="sw" style="background:#FFC83D;color:#1B1F3B"><b>Nova Gold</b>#FFC83D</div>
+    <div class="sw" style="background:#FFE08A;color:#1B1F3B"><b>Gold Light</b>#FFE08A</div>
+    <div class="sw" style="background:#E8604C;color:#F4ECDD"><b>Signal Coral</b>#E8604C</div>
+  </div>
+  <h3 style="margin-top:26px">Topic colours (chip + accent)</h3>
+  <div class="cols" style="grid-template-columns:repeat(8,1fr);gap:14px">
+    <div class="sw" style="background:#5B6BC0;color:#F4ECDD;height:96px"><b>อวกาศ</b>#5B6BC0</div>
+    <div class="sw" style="background:#E27A92;color:#1B1F3B;height:96px"><b>ร่างกาย</b>#E27A92</div>
+    <div class="sw" style="background:#4FA06E;color:#1B1F3B;height:96px"><b>ธรรมชาติ</b>#4FA06E</div>
+    <div class="sw" style="background:#2E9C8E;color:#1B1F3B;height:96px"><b>โลกของเรา</b>#2E9C8E</div>
+    <div class="sw" style="background:#8B6CC4;color:#F4ECDD;height:96px"><b>สมองและจิตใจ</b>#8B6CC4</div>
+    <div class="sw" style="background:#3C8DCB;color:#F4ECDD;height:96px"><b>วิทย์และเทคโนฯ</b>#3C8DCB</div>
+    <div class="sw" style="background:#E8604C;color:#F4ECDD;height:96px"><b>ความเชื่อผิด</b>#E8604C</div>
+    <div class="sw" style="background:#E9A21F;color:#1B1F3B;height:96px"><b>ถ้าหาก…?</b>#E9A21F</div>
+  </div>
+  <div class="cols c3" style="margin-top:26px;gap:26px">
+    <div class="small"><b>สัดส่วน 60 · 30 · 10:</b> พื้นมืดหรือครีม 60% ชั้นกระดาษสีคราม 30% และทอง/คอรัล/สีหัวข้อรวมกันไม่เกิน 10%</div>
+    <div class="small"><b>ความหมายที่ล็อกไว้:</b> ทอง = แสงและคำตอบ (ห้ามใช้ทาพื้นที่ใหญ่) ส่วนคอรัล = 404, ความเชื่อผิด และคำเตือนเท่านั้น</div>
+    <div class="small"><b>คอนทราสต์ (WCAG):</b> ครีมบน Ink 13.7:1 · Ink บนทอง 10.4:1 · Gold Light บน Ink 12.5:1 · ชิปสีอ่อนใช้ตัวอักษร Ink</div>
+  </div>
+  <div class="num">06</div>
+</section>
+
+<!-- 7 typography -->
+<section class="pg" id="type">
+  <p class="kick">Typography</p><h1>ฟอนต์ 3 ตระกูล แต่ละตัวมีหน้าที่ชัดเจน</h1>
+  <div class="cols c3">
+    <div class="card"><h3>Display · Latin</h3><p style="font:800 64px/1 Unbounded;margin:6px 0 14px">NOVA</p><h2>Unbounded 800 / 600</h2><p class="small">ใช้กับ wordmark, คำภาษาอังกฤษบนปก และตัวเลขใหญ่ที่เป็นภาษาอังกฤษ เขียนด้วยตัวพิมพ์ใหญ่เสมอ ระยะห่างตัวอักษร 0</p></div>
+    <div class="card"><h3>Thai · ทุกข้อความหลัก</h3><p style="font:800 58px/1.05 Kanit;margin:6px 0 14px">ทำไม<span style="background:var(--gold);padding:0 6px;border-radius:6px">ง่วง</span>?</p><h2>Kanit 800 / 600 / 400</h2><p class="small">ใช้ 800 กับ Hook และพาดหัว ใช้ 600 กับซับไตเติลและชิป ใช้ 400 กับคำอธิบาย Kanit เป็นฟอนต์เดียวกับที่ใช้ใน Shorts ทุกเรื่องที่ทำมาแล้ว</p></div>
+    <div class="card"><h3>Data · Sources · Labels</h3><p style="font:700 54px/1 'Space Mono';margin:6px 0 14px">404 · 8:20</p><h2>Space Mono 700 / 400</h2><p class="small">ใช้กับป้าย 404, แหล่งข้อมูล, ตัวเลขข้อมูล, ชิปภาษาอังกฤษ และ timecode ให้ความรู้สึกเหมือน "ห้องแล็บ"</p></div>
+  </div>
+  <table style="margin-top:26px"><tr><th>บทบาท (1080×1920)</th><th>ฟอนต์</th><th>ขนาด</th><th>สี</th><th>หมายเหตุ</th></tr>
+    <tr><td>Hook / ปก</td><td>Kanit 800</td><td>80–96 px</td><td>Ink บนการ์ดครีม</td><td>ไม่เกิน 2 บรรทัด บรรทัดละ ≤ 16 ตัวอักษร คำเด่น 1 คำอยู่บนการ์ดทอง</td></tr>
+    <tr><td>ซับไตเติล</td><td>Kanit 600</td><td>54 px</td><td>ขาว / คำที่กำลังพูดเป็น #FFD84D · ขอบ #1E1A24</td><td>y ≈ 1455 ไม่เกิน 2 บรรทัด กว้างไม่เกิน 860 px</td></tr>
+    <tr><td>ป้ายข้อมูลในภาพ</td><td>Kanit 600–700</td><td>40–52 px</td><td>Ink บนครีม/ทอง</td><td>อยู่ติดกับวัตถุที่อ้างถึง</td></tr>
+    <tr><td>Topic chip</td><td>Kanit 600 / Space Mono 700</td><td>46 / 30 px</td><td>ดูตาราง palette</td><td>มุมซ้ายบน x 72, y 238</td></tr>
+    <tr><td>แหล่งข้อมูล</td><td>Space Mono 400</td><td>28 px</td><td>ครีมบนพื้นมืดโปร่ง 78%</td><td>x 72, y 1548 (เหนือ UI ของ YouTube)</td></tr></table>
+  <div class="num">07</div>
+</section>
+
+<!-- 8 titles, chips, subtitles -->
+<section class="pg" id="text">
+  <p class="kick">Text on screen</p><h1>พาดหัว ซับไตเติล และตัวอักษรเคลื่อนไหว</h1>
+  <div class="cols" style="grid-template-columns:420px 1fr;gap:44px">
+    <img src="img/kit.jpg" style="width:420px;border-radius:14px;box-shadow:3px 8px 18px rgba(38,24,14,.2)">
+    <div class="cols c2" style="gap:26px;align-content:start">
+      <div class="card"><h3>Hook card</h3><ul class="small"><li>ตัวอักษรวางบนการ์ดกระดาษครีมระดับ lv 3 เอียง ±1° สลับกันในแต่ละบรรทัด</li><li>มีคำเด่น 1 คำต่อ Hook วางบนการ์ดทอง</li><li>เข้าแบบ <b>pop</b> (backOut) 0.6 s แต่ละบรรทัดห่างกัน 0.18 s</li><li>ออกด้วยการเลื่อนขึ้นและจางหายภายใน 0.3 s</li></ul></div>
+      <div class="card"><h3>Karaoke subtitles</h3><ul class="small"><li>แสดงทีละวลีตามเสียงพูด โดยใช้ <span class="mono">subs_th.js</span> เดิม</li><li>วลีที่กำลังพูดเป็นสีเหลืองและลอยขึ้น 6 px วลีที่พูดแล้วเป็นสีขาว วลีที่ยังไม่พูดเป็นสีขาว 62%</li><li>ทั้งบรรทัดลอยขึ้นมาก่อนเสียงเริ่ม 0.12 s</li><li>ถ้าซับบังภาพสำคัญ ให้ใช้ <span class="mono">SUB_Y</span> เลื่อนตำแหน่ง</li></ul></div>
+      <div class="card"><h3>Chips · Source · 404</h3><ul class="small"><li>ใช้ topic chip 1 อันต่อคลิป แสดงตลอดช่วง Hook</li><li>ป้ายแหล่งข้อมูลต้องขึ้นทุกครั้งที่มีตัวเลขหรือข้อสรุปจากงานวิจัย</li><li>ตราประทับ 404 ใช้เฉพาะตอนเฉลยว่า "ความเชื่อนี้ผิด" โดยประทับลงด้วยการหมุน 0.6 rad และ backOut</li></ul></div>
+      <div class="card"><h3>Animated numbers</h3><ul class="small"><li>ตัวเลขนับขึ้นด้วย easeOut 0.8 s ใช้ Kanit 700 บนการ์ด</li><li>หน่วยต้องอยู่บรรทัดเดียวกับตัวเลขเสมอ</li><li>ตัวเลขที่เป็นค่าประมาณใช้ "~" และมีป้ายแหล่งข้อมูล</li></ul></div>
+    </div>
+  </div>
+  <div class="num">08</div>
+</section>
+
+<!-- 9 paper-cut style -->
+<section class="pg dark" id="paper">
+  <p class="kick">Illustration style</p><h1>กระดาษตัดซ้อนชั้น: กติกาของแสงและเงา</h1>
+  <div class="cols c2" style="gap:44px">
+    <div>
+      <table><tr><th>ชั้น (lv)</th><th>เงา</th><th>ใช้กับ</th></tr>
+        <tr><td>0</td><td>ไม่มีเงา</td><td>ลายบนกระดาษ ช่องว่าง จุดดาว</td></tr>
+        <tr><td>1</td><td>blur 10 · y 5.5</td><td>รายละเอียดบนวัตถุ ป้ายเล็ก</td></tr>
+        <tr><td>2</td><td>blur 17 · y 9.5</td><td>วัตถุหลัก ตัวละคร ชิป</td></tr>
+        <tr><td>3</td><td>blur 24 · y 13.5</td><td>วัตถุพระเอกของฉาก การ์ดพาดหัว ขอบ portal</td></tr>
+        <tr><td>4</td><td>blur 31 · y 17.5</td><td>สิ่งที่ลอยใกล้กล้อง (ใช้น้อยที่สุด)</td></tr></table>
+      <p class="small" style="margin-top:14px">เงาสีน้ำตาลอุ่น <span class="mono">rgba(38,24,14,.30–.40)</span> แสงมาจาก<b>ซ้ายบน</b>เสมอ เงาจึงตกไปทางขวาล่าง ทุกชิ้นมีลายเส้นใยกระดาษ (FIBER) คูณทับ 0.7 ค่าทั้งหมดมาจาก <span class="mono">cut()</span> ใน paper.js</p>
+    </div>
+    <div class="cols c2" style="gap:20px">
+      <div class="card"><h3 class="do">ทำ</h3><ul class="small"><li>ใช้รูปทรงเรียบที่ตัดได้ด้วยกรรไกร</li><li>มีความลึก 3–4 ชั้นต่อฉาก</li><li>ใช้แสงแบบ "glow" (shine) กับดาว ไฟ และพลังงาน</li><li>ใช้ไล่สีเฉพาะท้องฟ้า และให้นุ่มมาก</li><li>รูปทรงของวัตถุคงที่ตลอดคลิป</li></ul></div>
+      <div class="card"><h3 class="dont">ไม่ทำ</h3><ul class="small"><li>ภาพ flat vector ที่ไม่มีเงาหรือลายกระดาษ</li><li>ตัวการ์ตูนเด็ก ตาโต สีสด</li><li>3D สมจริง หรือภาพถ่าย</li><li>gradient หนัก ๆ หรือ neon แบบ AI</li><li>เงาจากหลายทิศในเฟรมเดียวกัน</li></ul></div>
+      <div class="card" style="grid-column:span 2"><h3>Cinematic light</h3><p class="small">ฉากกลางคืนใช้ Deep Void ไล่ไป Ink โดยมีแหล่งแสงอุ่นจุดเดียว (ดาว ดวงอาทิตย์ หรือหน้าจอ) ส่วนฉากกลางวันใช้พื้นกระดาษพาสเทลตามสีหัวข้อ และมีวงกลมกระดาษซ้อน 2 ชั้นอยู่หลังวัตถุพระเอก (ดูหน้า 13)</p></div>
+    </div>
+  </div>
+  <div class="num">09</div>
+</section>
+
+<!-- 10 composition -->
+<section class="pg" id="composition">
+  <p class="kick">Composition</p><h1>โครงเฟรม Shorts 9:16</h1>
+  <div class="cols" style="grid-template-columns:400px 1fr;gap:50px">
+    <img src="img/cover_template.jpg" style="width:400px;border-radius:14px">
+    <div>
+      <table><tr><th>โซน</th><th>พิกัด (1080×1920)</th><th>ใช้วางอะไร</th></tr>
+        <tr><td>Hook</td><td>y 150–600</td><td>ชิปหัวข้อ + พาดหัว 2 บรรทัด อ่านจบใน 1.5 วินาที</td></tr>
+        <tr><td>Subject</td><td>y 640–1340</td><td>วัตถุพระเอก 1 ชิ้นอยู่กลางเฟรม มีวงกระดาษรองหลัง</td></tr>
+        <tr><td>Subtitles</td><td>y ≈ 1455</td><td>ซับคาราโอเกะ ไม่เกิน 2 บรรทัด</td></tr>
+        <tr><td>Source</td><td>y ≈ 1548</td><td>ป้ายแหล่งข้อมูล ชิดซ้าย</td></tr>
+        <tr><td>UI ของ YouTube</td><td>y &gt; 1560 · x &gt; 930</td><td>ใส่ได้เฉพาะของตกแต่ง ห้ามมีข้อความ</td></tr>
+        <tr><td>Brand bug</td><td>x 976, y 132 · r 34</td><td>สัญลักษณ์ portal ขนาดเล็ก โปร่ง 90%</td></tr></table>
+      <ul class="small" style="margin-top:18px"><li><b>หนึ่งความคิดต่อหนึ่งช็อต:</b> มีวัตถุพระเอก 1 ชิ้น และป้ายข้อมูลไม่เกิน 2 ป้าย</li><li><b>กล้อง:</b> ใช้ <span class="mono">pcCam</span> ค่อย ๆ ซูมหรือแพน ทุกช็อตต้องมีการเคลื่อนไหว ห้ามภาพนิ่งเกิน 1 วินาที (เกณฑ์ QC เดิม)</li><li><b>Parallax:</b> พื้นหลังใช้ <span class="mono">layer(.3–.6)</span> ส่วนวัตถุหลักใช้ <span class="mono">layer(1)</span></li><li><b>ความยาว:</b> 30–60 วินาที Hook ภายใน 2 วินาทีแรก และจบด้วย end card 2–3 วินาที</li></ul>
+    </div>
+  </div>
+  <div class="num">10</div>
+</section>
+
+<!-- 11 motion -->
+<section class="pg dark" id="motion">
+  <p class="kick">Motion</p><h1>การเคลื่อนไหว การเปลี่ยนฉาก และ logo sting</h1>
+  <div class="cols c2" style="gap:44px">
+    <div>
+      <table><tr><th>องค์ประกอบ</th><th>การเคลื่อนไหว</th><th>เวลา</th></tr>
+        <tr><td>วัตถุเข้าฉาก</td><td>pop (backOut) จาก 0 → 1</td><td>0.4–0.6 s</td></tr>
+        <tr><td>ข้อความ</td><td>pop + ลอยขึ้น 26 px</td><td>0.25 s</td></tr>
+        <tr><td>เปลี่ยนฉาก</td><td>dissolve ของ timeline.js หรือ "เปิดแผ่นกระดาษ" (portal wipe)</td><td>0.3–0.5 s</td></tr>
+        <tr><td>Portal wipe</td><td>วงกระดาษ 4 วงขยายจากวัตถุออกไปเต็มเฟรม</td><td>0.6 s</td></tr>
+        <tr><td>Idle</td><td>ลอยขึ้นลง ±6 px, หายใจ ±3%, ดาวกะพริบ</td><td>ต่อเนื่อง</td></tr>
+        <tr><td>Logo sting</td><td>วงเปิด → ดาวหมุนเข้า → ตัวอักษรขึ้น → ป้าย 404 ประทับ</td><td>2.4 s</td></tr>
+        <tr><td>End card</td><td>portal + wordmark + "ติดตามไว้ ไม่หลงทางความรู้"</td><td>2–3 s</td></tr></table>
+      <p class="small" style="margin-top:14px">ห้ามแสงกะพริบเกิน 3 ครั้งต่อวินาที ห้ามสั่นกล้อง และห้ามใช้เอฟเฟกต์ glitch ที่ทำให้อ่านไม่ออก ถ้าจะสื่อ 404 ให้ใช้ป้ายกระดาษแทน</p>
+    </div>
+    <div><img src="img/sting_strip.jpg" style="width:100%;border-radius:12px"><p class="mono" style="margin-top:8px">templates/nova404_logo_sting.mp4 · nova_brand.js → novaSting(t)</p></div>
+  </div>
+  <div class="num">11</div>
+</section>
+
+<!-- 12 characters & objects -->
+<section class="pg" id="characters">
+  <p class="kick">Characters &amp; objects</p><h1>ตัวละครและวัตถุ</h1>
+  <div class="cols c3">
+    <div class="card"><h3>"อิ่ม" ตัวแทนผู้ชม</h3><ul class="small"><li>เป็นคนกระดาษตัวกลม มองจากด้านหน้า ใช้ <span class="mono">person()</span> จาก sleepy/props.js</li><li>สีเสื้อเปลี่ยนตามหัวข้อ ส่วนผิวและผมคงเดิมเสมอ</li><li>แสดงอารมณ์ผ่านตา ปาก และแขน โดยไม่ยืดหรือเปลี่ยนรูปทรงตัว</li><li>อยู่ในเฟรมเพื่อ "สงสัยแทนผู้ชม" ไม่ใช่มาสคอตที่เต้นหรือเล่นมุก</li></ul></div>
+    <div class="card"><h3>วัตถุและอวัยวะ</h3><ul class="small"><li>วาดให้ถูกหลักกายวิภาค แต่ตัดทอนให้เหลือรูปทรงที่ตัดด้วยกรรไกรได้</li><li>อวัยวะใส่หน้าได้เฉพาะตอนเป็นผู้เล่าเรื่อง (เช่นสมองใน "10%") และต้องเก็บหน้าไว้ในฉากที่อธิบายข้อเท็จจริง</li><li>ไม่แสดงบาดแผลหรือเลือด การบาดเจ็บสื่อด้วยสัญลักษณ์บนแผนภาพ</li><li>ข้อมูลที่ไม่ใช่ค่าจริงต้องมีป้าย "สถานการณ์สมมติ"</li></ul></div>
+    <div class="card"><h3>คลังที่ใช้ซ้ำได้</h3><p class="small mono">props.js: sky cloud sun moon stars earth turbine solarRow battery tree building car train …<br>sleepy: person brain gauge zzz<br>brain10: brainBuddy neuron eeg<br>nails: heart ecg magnifier<br>sweat: thermometer flame bottle<br>sneeze: airway spray tissue<br>sleepdebt: bed coin piggy<br>nova_brand.js: novaPortal novaStar novaChip novaHook novaSource novaMyth novaSky novaSting novaEnd</p></div>
+  </div>
+  <div class="num">12</div>
+</section>
+
+<!-- 13 topic system -->
+<section class="pg dark" id="topics">
+  <p class="kick">One system, many topics</p><h1>หนึ่งระบบ ใช้ได้ทุกหัวข้อ</h1>
+  <div class="cols" style="grid-template-columns:repeat(6,1fr);gap:18px">
+    <img src="img/nova404_sample_space.jpg" style="border-radius:10px"><img src="img/nova404_sample_body.jpg" style="border-radius:10px">
+    <img src="img/nova404_sample_myth.jpg" style="border-radius:10px"><img src="img/nova404_sample_whatif.jpg" style="border-radius:10px">
+    <img src="img/nova404_sample_nature.jpg" style="border-radius:10px"><img src="img/nova404_sample_mind.jpg" style="border-radius:10px">
+  </div>
+  <p class="small" style="margin-top:20px">สิ่งที่<b>คงที่</b>ในทุกคลิป: ตำแหน่ง chip, การ์ดพาดหัว, ฟอนต์, ซับไตเติล, ป้ายแหล่งข้อมูล, brand bug และกติกาเงา · สิ่งที่<b>เปลี่ยนตามหัวข้อ</b>: สีพื้น (กลางคืนสำหรับอวกาศและ What If, พาสเทลตามสีหัวข้อสำหรับเรื่องอื่น), สี chip และวัตถุพระเอก</p>
+  <div class="num">13</div>
+</section>
+
+<!-- 14 channel art -->
+<section class="pg" id="channel">
+  <p class="kick">Channel</p><h1>Channel art, โปรไฟล์ และ thumbnail</h1>
+  <div class="cols" style="grid-template-columns:1fr 300px;gap:40px">
+    <div><img src="img/channel_art_guide.jpg" style="border-radius:12px"><p class="small" style="margin-top:10px">ขนาด 2560×1440 px โลโก้และข้อความทั้งหมดอยู่ใน safe area 1546×423 ส่วนแถบ desktop (2560×423) มีโลกและสมองอยู่ทั้งสองข้าง จึงไม่ดูโล่งเมื่อถูก crop</p></div>
+    <div><img src="img/profile.jpg" style="width:240px;border-radius:50%"><p class="small" style="margin-top:12px">โปรไฟล์ 800×800 px ใช้สัญลักษณ์ portal บนพื้น Ink เพราะ YouTube จะ crop เป็นวงกลม</p>
+      <img src="img/thumb_16x9.jpg" style="width:300px;border-radius:8px;margin-top:20px"><p class="small">Thumbnail 1280×720 สำหรับ playlist หรือคลิปยาว</p></div>
+  </div>
+  <div class="num">14</div>
+</section>
+
+<!-- 15 files -->
+<section class="pg dark" id="files">
+  <p class="kick">Files</p><h1>ไฟล์ในชุด brand_identity/</h1>
+  <div class="cols c2 mono" style="gap:40px;font-size:16px;line-height:1.7">
+    <div>logo/ — SVG: main light/dark · mono black/white · stacked · icon · profile<br>logo/png/ — PNG โปร่งใส 2× ทุกเวอร์ชัน<br>logo/concepts/ — A · B · C (SVG + PNG)<br>channel_art/ — 2560×1440 + safe-area guide<br>color_palette/ — JSON · CSS · PNG<br>typography/ — fonts (OFL) · guide PNG + MD</div>
+    <div>brand_guidelines/ — PDF นี้ · channel_info.md<br>templates/nova_brand.js — ชุดเครื่องมือของ engine<br>templates/nova404_logo_sting.mp4 · end_card.mp4<br>templates/stills/ — cover · kit · end card · thumbnail<br>preview/ — samples 6 หัวข้อ · channel mockup · sting strip<br>src/ — make_logo.mjs · stage.html · scenes.js · render.mjs</div>
+  </div>
+  <div style="margin-top:70px"><img src="../logo/png/nova404_logo_main_dark.png" style="width:420px"><p style="font:500 26px Kanit;margin-top:14px;color:var(--goldlt)">ความรู้ที่หาไม่เจอ… เราหามาให้</p></div>
+  <div class="num">15</div>
+</section>
+
+<script>
+  const only = new URLSearchParams(location.search).get('only');
+  if (only) { document.body.classList.add('one'); document.getElementById(only).classList.add('show'); }
+  Promise.all([document.fonts.ready, ...[...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))])
+    .then(() => { window.done = true; });
+</script>
+</body>
+</html>

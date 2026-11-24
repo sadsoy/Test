@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+<defs>
+  <filter id="pc" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="5"/><feOffset dx="2.1" dy="7" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.38"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter>
+  <filter id="pcs" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dx="1.2" dy="4" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.32"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter></defs>
+
+<rect width="800" height="800" fill="#1B1F3B"/><circle cx="400" cy="400" r="376" fill="#232955"/><g filter="url(#pc)"><circle cx="400" cy="406" r="272" fill="#F4ECDD"/></g>
+  <g filter="url(#pcs)"><circle cx="406.8" cy="411.44" r="228.48" fill="#2E3A6E"/></g>
+  <g filter="url(#pcs)"><circle cx="410.88" cy="415.52" r="179.52" fill="#46559A"/></g>
+  <circle cx="413.6" cy="418.24" r="130.56" fill="#0E1226"/>
+  <circle cx="345.6" cy="465.84" r="9.52" fill="#F4ECDD" opacity=".9"/>
+  <circle cx="481.6" cy="474" r="5.98" fill="#F4ECDD" opacity=".7"/>
+  <g filter="url(#pc)"><path d="M421.76,278.16 L403.3,368.5 L312.96,386.96 L403.3,405.42 L421.76,495.76 Z" fill="#FFE08A"/>
+  <path d="M421.76,278.16 L440.22,368.5 L530.56,386.96 L440.22,405.42 L421.76,495.76 Z" fill="#FFC83D"/></g>
+</svg>

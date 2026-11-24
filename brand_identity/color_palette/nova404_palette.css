@@ -1,0 +1,9 @@
+/* NOVA 404 colour tokens */
+:root {
+  --nova-ink: #1B1F3B; --nova-indigo: #2E3A6E; --nova-dusk: #46559A; --nova-void: #0E1226;
+  --nova-cream: #F4ECDD; --nova-paper: #EDE3D1; --nova-gold: #FFC83D; --nova-gold-light: #FFE08A;
+  --nova-coral: #E8604C; --nova-mist: #C9CFE6;
+  --topic-space: #5B6BC0; --topic-body: #E27A92; --topic-nature: #4FA06E; --topic-earth: #2E9C8E;
+  --topic-mind: #8B6CC4; --topic-tech: #3C8DCB; --topic-myth: #E8604C; --topic-whatif: #E9A21F;
+  --font-display: "Unbounded", sans-serif; --font-thai: "Kanit", sans-serif; --font-mono: "Space Mono", monospace;
+}

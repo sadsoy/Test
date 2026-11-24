@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<defs>
+  <filter id="pc" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="5"/><feOffset dx="2.1" dy="7" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.38"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter>
+  <filter id="pcs" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dx="1.2" dy="4" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.32"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter></defs>
+<rect width="512" height="512" fill="#F4ECDD"/>
+<g filter="url(#pc)"><circle cx="256" cy="256" r="220" fill="#1B1F3B"/></g>
+  <g filter="url(#pcs)"><circle cx="261.5" cy="260.4" r="184.8" fill="#2E3A6E"/></g>
+  <g filter="url(#pcs)"><circle cx="264.8" cy="263.7" r="145.2" fill="#46559A"/></g>
+  <circle cx="267" cy="265.9" r="105.6" fill="#0E1226"/>
+  <circle cx="212" cy="304.4" r="7.7" fill="#F4ECDD" opacity=".9"/>
+  <circle cx="322" cy="311" r="4.84" fill="#F4ECDD" opacity=".7"/>
+  <g filter="url(#pc)"><path d="M273.6,152.6 L258.67,225.67 L185.6,240.6 L258.67,255.53 L273.6,328.6 Z" fill="#FFE08A"/>
+  <path d="M273.6,152.6 L288.53,225.67 L361.6,240.6 L288.53,255.53 L273.6,328.6 Z" fill="#FFC83D"/></g>
+</svg>

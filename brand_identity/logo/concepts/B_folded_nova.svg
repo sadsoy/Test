@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<defs>
+  <filter id="pc" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="5"/><feOffset dx="2.1" dy="7" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.38"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter>
+  <filter id="pcs" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dx="1.2" dy="4" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.32"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter></defs>
+<rect width="512" height="512" fill="#F4ECDD"/>
+<g filter="url(#pc)"><rect x="16" y="16" width="480" height="480" rx="70" fill="#1B1F3B"/></g><g filter="url(#pc)"><path d="M256,230 L256,30 L292.77,193.23 Z" fill="#FFE08A"/><path d="M256,230 L292.77,193.23 L456,230 Z" fill="#FFC83D"/><path d="M256,230 L456,230 L292.77,266.77 Z" fill="#FFE08A"/><path d="M256,230 L292.77,266.77 L256,430 Z" fill="#FFC83D"/><path d="M256,230 L256,430 L219.23,266.77 Z" fill="#FFE08A"/><path d="M256,230 L219.23,266.77 L56,230 Z" fill="#FFC83D"/><path d="M256,230 L56,230 L219.23,193.23 Z" fill="#FFE08A"/><path d="M256,230 L219.23,193.23 L256,30 Z" fill="#FFC83D"/></g><path d="M225.48 470L216.24 470L216.24 460.76L194.40 460.76L194.40 448.02L207.98 421L225.48 421L225.48 451.94L232.62 451.94L232.62 460.76L225.48 460.76L225.48 470M202.38 450.68L202.38 451.94L216.24 451.94L216.24 425.62L214.98 425.62 M256 470.98Q247.60 470.98 242.77 465.83Q237.94 460.69 237.94 450.96L237.94 440.04Q237.94 430.59 242.77 425.31Q247.60 420.02 256 420.02Q264.40 420.02 269.23 425.31Q274.06 430.59 274.06 440.04L274.06 450.96Q274.06 460.69 269.23 465.83Q264.40 470.98 256 470.98M256 462.58Q261.04 462.58 262.93 459.50Q264.82 456.42 264.82 451.52L264.82 439.48Q264.82 436.40 263.91 433.88Q263 431.36 261.07 429.89Q259.15 428.42 256 428.42Q252.85 428.42 250.89 429.89Q248.93 431.36 248.06 433.88Q247.18 436.40 247.18 439.48L247.18 451.52Q247.18 456.42 249.07 459.50Q250.96 462.58 256 462.58M256 451.38Q253.62 451.38 251.87 449.63Q250.12 447.88 250.12 445.50Q250.12 443.12 251.87 441.37Q253.62 439.62 256 439.62Q258.38 439.62 260.13 441.37Q261.88 443.12 261.88 445.50Q261.88 447.88 260.13 449.63Q258.38 451.38 256 451.38 M311.16 470L301.92 470L301.92 460.76L280.08 460.76L280.08 448.02L293.66 421L311.16 421L311.16 451.94L318.30 451.94L318.30 460.76L311.16 460.76L311.16 470M288.06 450.68L288.06 451.94L301.92 451.94L301.92 425.62L300.66 425.62" fill="#F4ECDD"/>
+</svg>

@@ -115,3 +115,7 @@ code, Ghibli-inspired, built with ClaudeAnimationBase (copied from P Doom).
 - Done: 39.9 s → `out/shorts/sneeze/sneeze_shorts.mp4` (+ `_720p`). Docs `shorts/sneeze/`, code `src/shorts/sneeze/`.
   Rebuild: `SHORT=sneeze python3 -I scripts/shorts_voice.py shorts/sneeze/take1.wav =4.22,=7.96,=12.92,=17.95,=22.22,=26.06,=30.90,=34.31,=39.61,=41.81`
   → `shorts_checkcuts.py` → `SHORT=sneeze node scripts/shorts_audio.mjs` → render `--page=shorts_sneeze.html`.
+
+## NOVA 404 brand identity
+
+Everything is in `brand_identity/`; see `brand_identity/README.md` for the commands that rebuild each file.

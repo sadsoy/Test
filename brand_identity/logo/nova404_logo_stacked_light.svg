@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 840" width="1000" height="840">
+<defs>
+  <filter id="pc" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="5"/><feOffset dx="2.1" dy="7" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.38"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter>
+  <filter id="pcs" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="3"/><feOffset dx="1.2" dy="4" result="b"/>
+    <feFlood flood-color="#26170D" flood-opacity="0.32"/><feComposite in2="b" operator="in" result="shadow"/>
+    <feTurbulence type="fractalNoise" baseFrequency="1.15" numOctaves="2" seed="11"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -.32 .22" result="grain"/>
+    <feComposite in="grain" in2="SourceGraphic" operator="in" result="tex"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/><feMergeNode in="tex"/></feMerge>
+  </filter></defs>
+
+<g filter="url(#pc)"><circle cx="500" cy="270" r="230" fill="#1B1F3B"/></g>
+  <g filter="url(#pcs)"><circle cx="505.75" cy="274.6" r="193.2" fill="#2E3A6E"/></g>
+  <g filter="url(#pcs)"><circle cx="509.2" cy="278.05" r="151.8" fill="#46559A"/></g>
+  <circle cx="511.5" cy="280.35" r="110.4" fill="#0E1226"/>
+  <circle cx="454" cy="320.6" r="8.05" fill="#F4ECDD" opacity=".9"/>
+  <circle cx="569" cy="327.5" r="5.06" fill="#F4ECDD" opacity=".7"/>
+  <g filter="url(#pc)"><path d="M518.4,161.9 L502.79,238.29 L426.4,253.9 L502.79,269.51 L518.4,345.9 Z" fill="#FFE08A"/>
+  <path d="M518.4,161.9 L534.01,238.29 L610.4,253.9 L534.01,269.51 L518.4,345.9 Z" fill="#FFC83D"/></g><g filter="url(#pcs)"><path d="M172.46 637.50L231.56 725.10L221.51 727.20L221.51 637.50L255.41 637.50L255.41 750L211.61 750L151.16 660.30L161.06 658.20L161.06 750L127.31 750L127.31 637.50" fill="#1B1F3B"/><path d="M442.07 637.50L483.92 734.10L469.37 734.10L511.07 637.50L547.67 637.50L496.07 750L456.32 750L404.72 637.50 M658.67 729.75L581.57 729.75L581.57 701.85L658.67 701.85L658.67 729.75M597.62 637.50L643.82 637.50L694.22 750L656.87 750L616.07 652.65L625.52 652.65L584.57 750L547.37 750" fill="#1B1F3B"/></g><g filter="url(#pc)"><circle cx="333.062" cy="693.75" r="65.25" fill="#1B1F3B"/></g>
+  <g filter="url(#pcs)"><circle cx="334.69" cy="695.05" r="54.81" fill="#2E3A6E"/></g>
+  <g filter="url(#pcs)"><circle cx="335.67" cy="696.03" r="43.07" fill="#46559A"/></g>
+  <circle cx="336.32" cy="696.69" r="31.32" fill="#0E1226"/>
+  <circle cx="320.01" cy="708.11" r="2.28" fill="#F4ECDD" opacity=".9"/>
+  <circle cx="352.64" cy="710.06" r="1.44" fill="#F4ECDD" opacity=".7"/>
+  <g filter="url(#pc)"><path d="M338.28,663.08 L333.85,684.75 L312.18,689.18 L333.85,693.61 L338.28,715.28 Z" fill="#FFE08A"/>
+  <path d="M338.28,663.08 L342.71,684.75 L364.38,689.18 L342.71,693.61 L338.28,715.28 Z" fill="#FFC83D"/></g><g filter="url(#pcs)" transform="rotate(-4 798.75 715.85)"><path d="M715.07,677.89 L882.44,677.89 L865.75,715.85 L882.44,753.79 L715.07,753.79 L731.76,715.85 Z" fill="#E8604C"/><path d="M769.98 737.10L761.27 737.10L761.27 728.38L740.68 728.38L740.68 716.37L753.48 690.90L769.98 690.90L769.98 720.07L776.71 720.07L776.71 728.38L769.98 728.38L769.98 737.10M748.20 718.88L748.20 720.07L761.27 720.07L761.27 695.25L760.08 695.25 M798.76 738.02Q790.84 738.02 786.28 733.17Q781.73 728.32 781.73 719.14L781.73 708.85Q781.73 699.94 786.28 694.96Q790.84 689.97 798.76 689.97Q806.68 689.97 811.23 694.96Q815.78 699.94 815.78 708.85L815.78 719.14Q815.78 728.32 811.23 733.17Q806.68 738.02 798.76 738.02M798.76 730.10Q803.51 730.10 805.29 727.20Q807.07 724.29 807.07 719.67L807.07 708.32Q807.07 705.42 806.21 703.04Q805.36 700.66 803.54 699.28Q801.73 697.89 798.76 697.89Q795.79 697.89 793.94 699.28Q792.09 700.66 791.26 703.04Q790.44 705.42 790.44 708.32L790.44 719.67Q790.44 724.29 792.22 727.20Q794 730.10 798.76 730.10M798.76 719.54Q796.51 719.54 794.86 717.89Q793.21 716.24 793.21 714Q793.21 711.75 794.86 710.10Q796.51 708.45 798.76 708.45Q801 708.45 802.65 710.10Q804.30 711.75 804.30 714Q804.30 716.24 802.65 717.89Q801 719.54 798.76 719.54 M850.76 737.10L842.05 737.10L842.05 728.38L821.46 728.38L821.46 716.37L834.26 690.90L850.76 690.90L850.76 720.07L857.50 720.07L857.50 728.38L850.76 728.38L850.76 737.10M828.98 718.88L828.98 720.07L842.05 720.07L842.05 695.25L840.86 695.25" fill="#F4ECDD"/></g>
+</svg>

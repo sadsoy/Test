@@ -1,0 +1,27 @@
+{
+  "brand": "NOVA 404",
+  "core": {
+    "midnight_ink":  { "hex": "#1B1F3B", "use": "Main dark ground, logo ink on light, text on cream cards" },
+    "portal_indigo": { "hex": "#2E3A6E", "use": "Second paper layer, panels, far hills" },
+    "dusk_indigo":   { "hex": "#46559A", "use": "Third paper layer, mid hills, rings" },
+    "deep_void":     { "hex": "#0E1226", "use": "The portal hole, top of night skies (never a text colour)" },
+    "paper_cream":   { "hex": "#F4ECDD", "use": "Light ground, title cards, logo on dark" },
+    "warm_paper":    { "hex": "#EDE3D1", "use": "Default backing sheet of a light frame" },
+    "nova_gold":     { "hex": "#FFC83D", "use": "The star, highlight word, light — small areas only" },
+    "gold_light":    { "hex": "#FFE08A", "use": "Lit side of the star, glows, numbers on dark" },
+    "signal_coral":  { "hex": "#E8604C", "use": "404 label, myth stamp, warnings — reserved meaning" },
+    "mist":          { "hex": "#C9CFE6", "use": "Secondary text on dark" }
+  },
+  "topics": {
+    "space":  { "hex": "#5B6BC0", "th": "อวกาศ" },
+    "body":   { "hex": "#E27A92", "th": "ร่างกาย" },
+    "nature": { "hex": "#4FA06E", "th": "ธรรมชาติ" },
+    "earth":  { "hex": "#2E9C8E", "th": "โลกของเรา" },
+    "mind":   { "hex": "#8B6CC4", "th": "สมองและจิตใจ" },
+    "tech":   { "hex": "#3C8DCB", "th": "วิทย์และเทคโนฯ" },
+    "myth":   { "hex": "#E8604C", "th": "ความเชื่อผิด" },
+    "whatif": { "hex": "#E9A21F", "th": "ถ้าหาก…?" }
+  },
+  "subtitles": { "said": "#FFFFFF", "now": "#FFD84D", "ahead": "rgba(255,255,255,.62)", "outline": "#1E1A24" },
+  "shadow": { "colour": "#26180E", "opacity": "0.30–0.40", "direction": "light from top-left; shadow falls right and down" }
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>NOVA 404 stage</title>
+<!-- Renders the brand stills and the logo sting with the same paper-cut kit as the Shorts (src/shorts/paper.js).
+     stage.html?scene=<name>&w=<px>&h=<px>[&t=<s>]  → draws, then sets window.done. window.renderAt(t) redraws at time t. -->
+<style>
+  @font-face { font-family: "Unbounded"; font-weight: 800; src: url(../typography/fonts/unbounded-800.ttf); }
+  @font-face { font-family: "Unbounded"; font-weight: 600; src: url(../typography/fonts/unbounded-600.ttf); }
+  @font-face { font-family: "Kanit"; font-weight: 400; src: url(../typography/fonts/kanit-400.ttf); }
+  @font-face { font-family: "Kanit"; font-weight: 500 600; src: url(../typography/fonts/kanit-600.ttf); }
+  @font-face { font-family: "Kanit"; font-weight: 700 800; src: url(../typography/fonts/kanit-800.ttf); }
+  @font-face { font-family: "Space Mono"; font-weight: 400; src: url(../typography/fonts/spacemono-400.ttf); }
+  @font-face { font-family: "Space Mono"; font-weight: 700; src: url(../typography/fonts/spacemono-700.ttf); }
+  html, body { margin: 0; background: transparent; }
+  canvas { display: block; }
+</style>
+<script>
+  const Q = new URLSearchParams(location.search);
+  const PROJECT = { w: +(Q.get('w') || 1080), h: +(Q.get('h') || 1920), bpm: 100, offset: 0, duration: 10, fps: 30 };
+  // paper.js asks p5 for an offscreen canvas; a plain canvas is all it needs here
+  function createGraphics(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return { pixelDensity() {}, drawingContext: c.getContext('2d'), elt: c, canvas: c }; }
+</script>
+<script src="../../src/core.js"></script>
+<script src="../../src/shorts/paper.js"></script>
+<script src="../../src/shorts/props.js"></script>
+<script src="../../src/shorts/sleepy/props.js"></script>
+<script src="../../src/shorts/sweat/props.js"></script>
+<script src="../../src/shorts/nails/props.js"></script>
+<script src="../../src/shorts/brain10/props.js"></script>
+<script src="../../src/shorts/sleepdebt/props.js"></script>
+<script src="../../src/shorts/sneeze/props.js"></script>
+<script src="../templates/nova_brand.js"></script>
+<script src="scenes.js"></script>
+</head>
+<body>
+<canvas id="out"></canvas>
+<script>
+(async () => {
+  await Promise.all(['800 40px Unbounded', '400 40px Kanit', '600 40px Kanit', '800 40px Kanit', '400 40px "Space Mono"', '700 40px "Space Mono"'].map(f => document.fonts.load(f, 'NOVA ก404')));
+  const out = document.getElementById('out'); out.width = W; out.height = H; const o = out.getContext('2d');
+  pcInit();
+  const scene = SCENES[Q.get('scene') || 'channelart'];
+  window.renderAt = t => { pcBegin(NOVA.paper); scene(+t); o.clearRect(0, 0, W, H); o.drawImage(PG.elt, 0, 0); return true; };
+  window.renderAt(+(Q.get('t') || 3));
+  window.done = true;
+})().catch(e => { console.error('stage: ' + e.message); window.done = true; });
+</script>
+</body>
+</html>
