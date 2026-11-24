@@ -99,3 +99,8 @@ code, Ghibli-inspired, built with ClaudeAnimationBase (copied from P Doom).
   Rebuild: `SHORT=brain10 python3 -I scripts/shorts_voice.py shorts/brain10/take1.wav =3.75,=8.54,=12.85,=16.24,=20.30,=23.74,=27.63,=31.70,=35.15,=39.46`
   → `shorts_checkcuts.py` → `SHORT=brain10 node scripts/shorts_audio.mjs` → render `--page=shorts_brain10.html`.
 - Rule learned: no strobes. Full-frame flashing must stay ≤ 3 per second (photosensitive epilepsy); QC now counts them.
+
+## Short: เล็บและผมยังยาวหลังเสียชีวิตจริงไหม? (2026-11-24)
+- Done: 39.2 s → `out/shorts/nails/nails_shorts.mp4` (+ `_720p`). Docs `shorts/nails/`, code `src/shorts/nails/`, page `shorts_nails.html`.
+  Rebuild: `SHORT=nails python3 -I scripts/shorts_voice.py shorts/nails/take1.wav =4.37,=7.88,=11.09,=13.80,=17.34,=19.70,=22.18,=25.25,=29.64,=33.65`
+  → `shorts_checkcuts.py` → `SHORT=nails node scripts/shorts_audio.mjs` → render `--page=shorts_nails.html`.
